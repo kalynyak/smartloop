@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLoop - The Weightless Health Companion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container" id="logo-container">
+            <!-- SVG Logo will be injected here -->
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#voice">Voice</a>
+            <a href="#sensors">Sensors</a>
+            <a href="#design">Design</a>
+            <a href="#colors">Collection</a>
+            <button class="pre-order-btn">Join Waitlist</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <p class="hero-eyebrow">Introducing SmartLoop</p>
+            <h1>Less Gadget.<br>More You.</h1>
+            <p class="subtitle">The screen-free smart band that monitors your health and sleep — enriched by your voice. Log meals, mood, symptoms, or capture any thought on the go. AI connects the dots between what you share and what your body reveals.</p>
+            <div class="hero-actions">
+                <button class="primary-btn">Join the Waitlist</button>
+                <a href="#how-it-works" class="watch-video">See How It Works <span class="play-icon">→</span></a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Voice Health Logs</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Day Battery</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50m</span>
+                    <span class="stat-label">Waterproof</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="hero.png" alt="SmartLoop smart band in blue with LED indicators" class="hero-band-image">
+        </div>
+    </header>
+
+    <!-- Value Proposition -->
+    <section class="value-prop">
+        <div class="value-prop-content">
+            <h2>Your health. Your voice. Your data.</h2>
+            <p>SmartLoop captures what sensors can't — your thoughts, your meals, your mood. One tap starts a voice log. AI organizes everything. The iPhone app reveals the full picture of your wellbeing.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-header">
+            <h2>Intelligent by Design</h2>
+            <p>Every feature serves a purpose. Nothing more, nothing less.</p>
+        </div>
+        <div class="feature-grid">
+            <div class="feature-card large">
+                <div class="feature-icon"><span class="material-symbols-outlined">graphic_eq</span></div>
+                <h3>AI Voice Logging</h3>
+                <p>Tap once to record. Log your meals, supplements, water intake, mood, energy levels, work accomplishments — anything worth remembering. SmartLoop's AI transcribes, categorizes, and correlates your voice entries with biometric data automatically.</p>
+                <div class="voice-visual">
+                    <span class="wave"></span><span class="wave"></span><span class="wave"></span><span class="wave"></span><span class="wave"></span>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><span class="material-symbols-outlined">blur_on</span></div>
+                <h3>Invisible Interface</h3>
+                <p>No screen means no distractions. Two subtle RGB LEDs communicate everything you need to know — at a glance, without pulling you out of the moment.</p>
+                <ul class="led-legend">
+                    <li><span class="dot green"></span> All systems normal</li>
+                    <li><span class="dot orange"></span> Something to review</li>
+                    <li><span class="dot red"></span> Needs attention</li>
+                    <li><span class="dot blue"></span> Recording active</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><span class="material-symbols-outlined">insights</span></div>
+                <h3>iPhone App Analytics</h3>
+                <p>Your band collects. The app analyzes. See correlations between what you eat, how you sleep, and how you feel. AI-generated insights help you optimize your daily routines.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><span class="material-symbols-outlined">nights_stay</span></div>
+                <h3>Sleep Without Compromise</h3>
+                <p>Weighing almost nothing, SmartLoop disappears on your wrist at night. Track sleep stages, heart rate variability, and recovery — without the bulk of traditional trackers.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><span class="material-symbols-outlined">add_circle</span></div>
+                <h3>Built for Your Life</h3>
+                <p>Tesla digital key on your wrist. 50m water resistance for surfing, swimming, and diving. Quick voice memos when you need them. SmartLoop fits seamlessly into your active lifestyle.</p>
+                <ul class="bonus-features">
+                    <li><span class="material-symbols-outlined">key</span> Tesla Key</li>
+                    <li><span class="material-symbols-outlined">waves</span> Waterproof</li>
+                    <li><span class="material-symbols-outlined">mic</span> Voice Memos</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="section-header light">
+            <h2>How SmartLoop Works</h2>
+            <p>All the tracking you expect. Plus the context only you can provide.</p>
+        </div>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3>Wear & Forget</h3>
+                    <p>SmartLoop continuously tracks everything a modern fitness tracker does — heart rate, HRV, blood oxygen, skin temperature, sleep stages, steps, and workouts. All day. All night. No interaction needed.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3>Tap to Add Context</h3>
+                    <p>Press the button to add what sensors can't capture. "Just had oatmeal for breakfast." "Feeling stressed." "Took my vitamins." Your voice logs are transcribed and timestamped alongside your biometric data.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3>Discover Patterns</h3>
+                    <p>AI combines your objective sensor data with your subjective voice logs to reveal insights you'd never find otherwise. See how caffeine affects your sleep. Learn what triggers your energy dips. Make informed decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voice Features Section -->
+    <section id="voice" class="voice-section">
+        <div class="section-header">
+            <h2>Your Voice. Your Data.</h2>
+            <p>SmartLoop turns your words into wellness insights. Four powerful voice modes, one simple tap.</p>
+        </div>
+        <div class="voice-features-grid">
+            <div class="voice-feature-card">
+                <div class="voice-feature-icon">
+                    <span class="material-symbols-outlined">restaurant</span>
+                </div>
+                <h3>Health & Intake Logging</h3>
+                <p>Track meals, water, supplements, and medications effortlessly. Just say what you consumed — "Had a salad with grilled chicken for lunch" or "Took my vitamins and 2 liters of water today." AI extracts nutritional data automatically.</p>
+                <div class="voice-examples">
+                    <span class="example-tag">"Coffee with oat milk"</span>
+                    <span class="example-tag">"Took magnesium"</span>
+                    <span class="example-tag">"Skipped breakfast"</span>
+                </div>
+            </div>
+            <div class="voice-feature-card">
+                <div class="voice-feature-icon">
+                    <span class="material-symbols-outlined">sentiment_satisfied</span>
+                </div>
+                <h3>Mood & Energy Tracking</h3>
+                <p>Capture how you feel throughout the day. Log stress levels, energy dips, emotional states, and sleep quality. Over time, SmartLoop correlates your mood patterns with biometric data to reveal what affects your wellbeing.</p>
+                <div class="voice-examples">
+                    <span class="example-tag">"Feeling anxious"</span>
+                    <span class="example-tag">"Great energy today"</span>
+                    <span class="example-tag">"Tired after meeting"</span>
+                </div>
+            </div>
+            <div class="voice-feature-card">
+                <div class="voice-feature-icon">
+                    <span class="material-symbols-outlined">healing</span>
+                </div>
+                <h3>Symptoms & Context</h3>
+                <p>Log symptoms, sleep quality, and daily context that sensors can't capture. "Woke up with a headache," "Stressful day at work," or "Slept poorly last night." This context helps AI understand patterns behind your biometric data.</p>
+                <div class="voice-examples">
+                    <span class="example-tag">"Headache since noon"</span>
+                    <span class="example-tag">"Slept badly"</span>
+                    <span class="example-tag">"Stressful meeting"</span>
+                </div>
+            </div>
+            <div class="voice-feature-card">
+                <div class="voice-feature-icon">
+                    <span class="material-symbols-outlined">settings_voice</span>
+                </div>
+                <h3>Voice Control</h3>
+                <p>Control SmartLoop with your voice. Start any workout, set interval timers, mark laps, or end sessions — all without touching your phone or the band.</p>
+                <div class="voice-examples">
+                    <span class="example-tag">"Start surf session"</span>
+                    <span class="example-tag">"Mark a lap"</span>
+                    <span class="example-tag">"End workout"</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sensor Data -->
+    <section class="sensor-section" id="sensors">
+        <div class="section-header">
+            <h2>Advanced Biometric Sensors</h2>
+            <p>Medical-grade sensors work silently on your wrist, capturing the vital signs that tell the story of your health.</p>
+        </div>
+        <div class="sensors-grid">
+            <div class="sensor-card">
+                <div class="sensor-icon-large"><span class="material-symbols-outlined">ecg_heart</span></div>
+                <h3>Optical Heart Rate</h3>
+                <p>PPG (photoplethysmography) sensors use green LED lights to measure blood flow continuously. Track your resting heart rate, active heart rate zones, and see how your cardiovascular health improves over time.</p>
+            </div>
+            <div class="sensor-card">
+                <div class="sensor-icon-large"><span class="material-symbols-outlined">cardiology</span></div>
+                <h3>Heart Rate Variability</h3>
+                <p>HRV measures the variation between heartbeats — a key indicator of autonomic nervous system balance. Higher HRV typically indicates better recovery, lower stress, and improved fitness. SmartLoop tracks HRV during sleep for accurate readings.</p>
+            </div>
+            <div class="sensor-card">
+                <div class="sensor-icon-large"><span class="material-symbols-outlined">pulmonology</span></div>
+                <h3>Blood Oxygen (SpO2)</h3>
+                <p>Pulse oximetry measures oxygen saturation in your blood. Normal levels are 95-100%. SmartLoop monitors SpO2 during sleep to detect potential breathing irregularities and during workouts to track respiratory efficiency.</p>
+            </div>
+            <div class="sensor-card">
+                <div class="sensor-icon-large"><span class="material-symbols-outlined">device_thermostat</span></div>
+                <h3>Skin Temperature</h3>
+                <p>Continuous temperature monitoring detects deviations from your personal baseline. Elevated temperatures can indicate oncoming illness, while cyclical patterns help track ovulation and menstrual cycles with precision.</p>
+            </div>
+            <div class="sensor-card">
+                <div class="sensor-icon-large"><span class="material-symbols-outlined">speed</span></div>
+                <h3>3-Axis Accelerometer</h3>
+                <p>Motion sensing tracks steps, detects workout types automatically, measures sleep movements, and identifies sedentary periods. The accelerometer also enables tap gestures and fall detection for emergency alerts.</p>
+            </div>
+            <div class="sensor-card">
+                <div class="sensor-icon-large"><span class="material-symbols-outlined">bedtime</span></div>
+                <h3>Sleep Architecture</h3>
+                <p>Combining heart rate, HRV, movement, and temperature data, SmartLoop identifies sleep stages — light, deep, and REM. Understand your sleep quality, not just quantity, and see how lifestyle choices affect your rest.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Integration Section -->
+    <section class="ai-integration">
+        <div class="section-header light">
+            <h2>Where Sensors Meet Stories</h2>
+            <p>The magic happens when objective biometric data combines with your subjective voice logs.</p>
+        </div>
+        <div class="integration-content">
+            <div class="integration-explanation">
+                <div class="integration-block">
+                    <h3>The Data Fusion Advantage</h3>
+                    <p>Traditional wearables show you numbers — steps taken, calories burned, hours slept. But numbers without context are just noise. SmartLoop's AI correlates your sensor data with what you tell it: what you ate, how you felt, what stressed you out, what made you happy.</p>
+                </div>
+                <div class="integration-block">
+                    <h3>Personalized Insights</h3>
+                    <p>The iPhone app's AI engine analyzes patterns across days, weeks, and months. It learns YOUR body's unique responses. Maybe your HRV drops after eating dairy. Perhaps your sleep quality improves when you exercise before 3pm. SmartLoop finds these connections automatically.</p>
+                </div>
+                <div class="integration-block">
+                    <h3>Actionable Suggestions</h3>
+                    <p>Beyond insights, SmartLoop offers personalized recommendations based on your combined data. "Your heart rate variability has been low this week. Consider reducing caffeine — you logged 4 coffees yesterday." Health coaching that actually knows you.</p>
+                </div>
+            </div>
+            <div class="integration-examples">
+                <h3>Example Correlations</h3>
+                <div class="correlation-list">
+                    <div class="correlation-item">
+                        <div class="correlation-row">
+                            <span class="correlation-data"><span class="material-symbols-outlined">monitoring</span> SpO2 dropped to 92% during sleep</span>
+                            <span class="correlation-plus">+</span>
+                            <span class="correlation-voice"><span class="material-symbols-outlined">mic</span> "Had wine with dinner"</span>
+                        </div>
+                        <span class="correlation-result"><span class="material-symbols-outlined">lightbulb</span> Alcohol affects your breathing during sleep</span>
+                    </div>
+                    <div class="correlation-item">
+                        <div class="correlation-row">
+                            <span class="correlation-data"><span class="material-symbols-outlined">monitoring</span> HRV increased 15% this week</span>
+                            <span class="correlation-plus">+</span>
+                            <span class="correlation-voice"><span class="material-symbols-outlined">mic</span> "Started meditation practice"</span>
+                        </div>
+                        <span class="correlation-result"><span class="material-symbols-outlined">lightbulb</span> Meditation is improving your stress response</span>
+                    </div>
+                    <div class="correlation-item">
+                        <div class="correlation-row">
+                            <span class="correlation-data"><span class="material-symbols-outlined">monitoring</span> Resting heart rate elevated 8bpm</span>
+                            <span class="correlation-plus">+</span>
+                            <span class="correlation-voice"><span class="material-symbols-outlined">mic</span> "Feeling tired, throat scratchy"</span>
+                        </div>
+                        <span class="correlation-result"><span class="material-symbols-outlined">warning</span> Early signs of illness — consider resting today</span>
+                    </div>
+                    <div class="correlation-item">
+                        <div class="correlation-row">
+                            <span class="correlation-data"><span class="material-symbols-outlined">monitoring</span> Deep sleep up 23% this month</span>
+                            <span class="correlation-plus">+</span>
+                            <span class="correlation-voice"><span class="material-symbols-outlined">mic</span> "Taking magnesium before bed"</span>
+                        </div>
+                        <span class="correlation-result"><span class="material-symbols-outlined">lightbulb</span> Magnesium supplementation is working for you</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Section -->
+    <section id="design" class="design-section">
+        <div class="section-header">
+            <h2>Designed to Disappear</h2>
+            <p>Jewelry-grade craftsmanship meets invisible technology.</p>
+        </div>
+        <div class="design-grid">
+            <div class="design-card">
+                <h3>Braided Textile</h3>
+                <p>Inspired by Apple's braided watch bands, SmartLoop uses premium woven material that's soft against skin, breathable during workouts, and elegant enough for any occasion. No silicone. No rubber. No compromise.</p>
+            </div>
+            <div class="design-card">
+                <h3>No Buckle Design</h3>
+                <p>Stretch-fit construction eliminates clasps and buckles entirely. Slide it on, slide it off. The band hugs your wrist without pressure points — perfect for 24/7 wear including sleep tracking.</p>
+            </div>
+            <div class="design-card">
+                <h3>Detachable Module</h3>
+                <p>The slim electronics module clicks in and out of the band. Swap colors in seconds. Machine wash the textile portion. The tech stays safe while the band stays fresh.</p>
+            </div>
+            <div class="design-card">
+                <h3>30% Narrower</h3>
+                <p>At just 14mm wide — about 30% narrower than typical fitness bands — SmartLoop looks more like a minimalist bracelet than a fitness tracker. Subtle. Sophisticated. Unmistakably intentional.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secondary Features -->
+    <section class="secondary-features">
+        <div class="section-header light">
+            <h2>And There's More</h2>
+            <p>Features that make SmartLoop indispensable.</p>
+        </div>
+        <div class="secondary-grid">
+            <div class="secondary-card">
+                <div class="secondary-icon"><span class="material-symbols-outlined">key</span></div>
+                <h3>Tesla Digital Key</h3>
+                <p>Walk up. Door unlocks. No phone needed. SmartLoop integrates with Tesla's digital key system for seamless vehicle access.</p>
+            </div>
+            <div class="secondary-card">
+                <div class="secondary-icon"><span class="material-symbols-outlined">sos</span></div>
+                <h3>Emergency Detection</h3>
+                <p>Hard fall? Unusual heart pattern? SmartLoop can automatically alert your emergency contacts with your location when it detects a critical event.</p>
+            </div>
+            <div class="secondary-card">
+                <div class="secondary-icon"><span class="material-symbols-outlined">mic</span></div>
+                <h3>Quick Voice Memos</h3>
+                <p>Capture quick thoughts and reminders when your phone isn't handy. Voice memos are saved in the SmartLoop app for easy access later.</p>
+            </div>
+            <div class="secondary-card">
+                <div class="secondary-icon"><span class="material-symbols-outlined">waves</span></div>
+                <h3>Water Ready</h3>
+                <p>50 meters water resistance means surfing, swimming, diving — SmartLoop handles it all. Track your laps. Log your sessions. Never take it off.</p>
+            </div>
+            <div class="secondary-card">
+                <div class="secondary-icon"><span class="material-symbols-outlined">vibration</span></div>
+                <h3>Silent Alarms</h3>
+                <p>Gentle haptic vibrations wake you without disturbing your partner. Set alarms for medication, hydration reminders, or focus sessions.</p>
+            </div>
+            <div class="secondary-card">
+                <div class="secondary-icon"><span class="material-symbols-outlined">battery_full</span></div>
+                <h3>2-Day Battery</h3>
+                <p>Two full days of continuous tracking, voice logging, and smart features. Quick magnetic charging gets you back to 100% in under an hour.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection -->
+    <section id="colors" class="collection">
+        <div class="section-header">
+            <h2>The Collection</h2>
+            <p>Two distinct lines. Sixteen colors. One perfect fit.</p>
+        </div>
+        <div class="collection-lines">
+            <div class="collection-line">
+                <h3>Vivid</h3>
+                <p>Bold colors that make a statement. Express yourself.</p>
+                <div class="collection-image-container">
+                    <img src="band-colors.jpeg" alt="SmartLoop Vivid collection" class="collection-image">
+                </div>
+            </div>
+            <div class="collection-line">
+                <h3>Classic</h3>
+                <p>Timeless neutrals that pair with everything.</p>
+                <div class="collection-image-container">
+                    <img src="band-colors2.jpeg" alt="SmartLoop Classic collection" class="collection-image">
+                </div>
+            </div>
+        </div>
+        <div class="size-info-compact">
+            <h4>Precision Fit</h4>
+            <p>Available in <strong>12 sizes</strong> from 130mm to 215mm wrist circumference. Our fine-tuned range ensures a snug, comfortable fit for virtually any wrist — from petite to large. The SmartLoop app includes a simple measuring guide to help you find your perfect size.</p>
+        </div>
+    </section>
+
+    <!-- Tech Specs -->
+    <section id="tech" class="tech-specs">
+        <div class="section-header light">
+            <h2>Technical Specifications</h2>
+            <p>The details that matter.</p>
+        </div>
+        <div class="specs-container">
+            <div class="spec-column">
+                <h3>Sensors</h3>
+                <ul>
+                    <li>Optical heart rate (PPG)</li>
+                    <li>Heart rate variability (HRV)</li>
+                    <li>Blood oxygen (SpO2)</li>
+                    <li>Skin temperature sensor</li>
+                    <li>3-axis accelerometer</li>
+                    <li>Ambient light sensor</li>
+                </ul>
+            </div>
+            <div class="spec-column">
+                <h3>Interface</h3>
+                <ul>
+                    <li>2 RGB LED indicators</li>
+                    <li>Precision haptics engine</li>
+                    <li>Tactile action button</li>
+                    <li>Microphone for voice input</li>
+                    <li>No display (by design)</li>
+                </ul>
+            </div>
+            <div class="spec-column">
+                <h3>Connectivity</h3>
+                <ul>
+                    <li>Bluetooth 5.3 LE</li>
+                    <li>NFC (Tesla Key)</li>
+                    <li>iPhone app (iOS 16+)</li>
+                    <li>HealthKit integration</li>
+                    <li>Siri Shortcuts support</li>
+                </ul>
+            </div>
+            <div class="spec-column">
+                <h3>Physical</h3>
+                <ul>
+                    <li>Band width: 14mm</li>
+                    <li>Module: 28mm × 16mm × 8mm</li>
+                    <li>Weight: 16g total</li>
+                    <li>Water resistance: 50 meters</li>
+                    <li>Battery: 2-day typical use</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Simplify Your Health?</h2>
+            <p>Join thousands who've already signed up for early access. Be among the first to experience the future of wearable health tracking.</p>
+            <div class="cta-form">
+                <input type="email" placeholder="Enter your email" class="email-input">
+                <button class="cta-btn">Join Waitlist</button>
+            </div>
+            <p class="cta-note">No spam. Just updates on launch and exclusive early access.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo" id="footer-logo"></div>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Support</a>
+                <a href="#">Press</a>
+                <a href="#">Contact</a>
+            </div>
+            <p class="footer-tagline">Designed in California. Made for humans.</p>
+            <p>&copy; 2026 SmartLoop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Waitlist Modal -->
+    <div id="waitlist-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close">&times;</button>
+            <div class="modal-icon">
+                <span class="material-symbols-outlined">schedule</span>
+            </div>
+            <h2>Coming Soon</h2>
+            <p>SmartLoop is currently in development. Join our waitlist to be the first to know when we launch.</p>
+            <form class="modal-form" id="waitlist-form">
+                <input type="email" placeholder="Enter your email" class="modal-input" required>
+                <button type="submit" class="modal-submit">Notify Me</button>
+            </form>
+            <p class="modal-note">We'll only email you about the launch. No spam, ever.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
