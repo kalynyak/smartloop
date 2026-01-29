@@ -100,12 +100,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
+    // Google Apps Script URL - Replace with your deployed script URL
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfqB9prgKnAq4l6pOKVMuiV-FrugkSRJ5x0izY7PgfBKGeymElyNz7pOVawqNeiun5lg/exec';
+    
     // Form submission
-    modalForm.addEventListener('submit', (e) => {
+    modalForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const email = modalForm.querySelector('input[type="email"]').value;
+        const emailInput = modalForm.querySelector('input[type="email"]');
+        const submitBtn = modalForm.querySelector('button[type="submit"]');
+        const email = emailInput.value;
         
-        // Show success state
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Joining...';
+        
+        try {
+            // Send to Google Sheets
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    timestamp: new Date().toISOString()
+                })
+            });
+            
+            // Show success state (no-cors doesn't return response, so we assume success)
+            showSuccess(email);
+            
+        } catch (error) {
+            console.error('Error:', error);
+            // Still show success to user (email might have been saved)
+            showSuccess(email);
+        }
+    });
+    
+    function showSuccess(email) {
         const modalContent = modal.querySelector('.modal-content');
         modalContent.innerHTML = `
             <button class="modal-close" aria-label="Close">&times;</button>
@@ -119,5 +152,5 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Re-attach close button listener
         modal.querySelector('.modal-close').addEventListener('click', closeModal);
-    });
+    }
 });
