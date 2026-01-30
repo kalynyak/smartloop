@@ -257,6 +257,57 @@ h3 {
     object-fit: contain;
 }
 
+/* Apple Watch Mockup */
+.app-mockup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.watch-frame {
+    width: 200px;
+    height: 240px;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border-radius: 50px;
+    padding: 15px;
+    box-shadow: 
+        0 20px 60px rgba(0,0,0,0.3),
+        inset 0 1px 1px rgba(255,255,255,0.1);
+}
+
+.watch-screen {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #000 0%, #111 100%);
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.watch-screen .recording-icon {
+    font-size: 3rem;
+    color: var(--led-red);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.watch-screen .recording-text {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+.watch-screen .voice-visual {
+    margin-top: 0.5rem;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
 
 /* Value Proposition */
 .value-prop {
@@ -1024,6 +1075,117 @@ h3 {
     font-size: 0.9rem;
 }
 
+/* Watch Integration Section */
+.watch-integration {
+    padding: 6rem 5%;
+    background: #f5f5f7;
+}
+
+.watch-features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.watch-feature {
+    text-align: center;
+    padding: 2rem 1.5rem;
+}
+
+.watch-feature .material-symbols-outlined {
+    font-size: 2.5rem;
+    color: var(--led-blue);
+    margin-bottom: 1rem;
+}
+
+.watch-feature h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.watch-feature p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Privacy Section */
+.privacy-section {
+    padding: 6rem 5%;
+    background: var(--bg-dark);
+}
+
+.privacy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.privacy-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+.privacy-card .material-symbols-outlined {
+    font-size: 2.5rem;
+    color: var(--led-green);
+    margin-bottom: 1rem;
+}
+
+.privacy-card h3 {
+    color: #fff;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.privacy-card p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Requirements Section */
+.requirements-section {
+    padding: 6rem 5%;
+    background: #f5f5f7;
+}
+
+.requirements-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.requirement-card {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.requirement-card .material-symbols-outlined {
+    font-size: 3rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.requirement-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.requirement-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
 /* CTA Section */
 .cta-section {
     padding: 8rem 5%;
@@ -1267,6 +1429,35 @@ footer p:last-child {
     .collection-image {
         border-radius: 0.5rem;
     }
+    
+    .watch-features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .privacy-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .requirements-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .watch-frame {
+        width: 160px;
+        height: 192px;
+        border-radius: 40px;
+    }
+    
+    .watch-screen {
+        border-radius: 32px;
+    }
+    
+    .watch-screen .recording-icon {
+        font-size: 2.5rem;
+    }
 }
 
 /* Modal */
@@ -1414,5 +1605,9 @@ footer p:last-child {
     
     .modal-content h2 {
         font-size: 1.5rem;
+    }
+    
+    .watch-features-grid {
+        grid-template-columns: 1fr;
     }
 }
