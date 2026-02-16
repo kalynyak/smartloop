@@ -82,6 +82,12 @@
             letter-spacing: 0.05em;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .nav-links {
             display: flex;
             align-items: center;
@@ -116,6 +122,88 @@
         .nav-btn:hover {
             transform: scale(1.02);
             opacity: 0.9;
+        }
+
+        /* Hamburger */
+        .nav-hamburger {
+            display: none;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .nav-hamburger .material-symbols-outlined {
+            font-size: 1.75rem;
+        }
+
+        .nav-mobile {
+            display: none;
+            position: fixed;
+            top: 4.5rem;
+            right: 0;
+            width: 100%;
+            max-width: 320px;
+            height: calc(100vh - 4.5rem);
+            background: var(--bg-cream);
+            z-index: 999;
+            padding: 2rem 1.5rem;
+            box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+            flex-direction: column;
+            gap: 0.5rem;
+            overflow-y: auto;
+        }
+
+        .nav-mobile.active {
+            display: flex;
+        }
+
+        .nav-mobile a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .nav-mobile a:hover {
+            background: var(--bg-warm);
+        }
+
+        .nav-mobile .nav-btn {
+            margin-top: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .nav-mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 23, 20, 0.4);
+            z-index: 998;
+            backdrop-filter: blur(4px);
+        }
+
+        .nav-mobile-overlay.active {
+            display: block;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links a {
+                display: none;
+            }
+
+            .nav-hamburger {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
 
         /* Hero */
@@ -292,6 +380,120 @@
             line-height: 1.9;
             max-width: 700px;
             margin: 0 auto;
+        }
+
+        /* Use Cases Section */
+        .use-cases {
+            padding: 8rem 5%;
+            background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg-cream) 100%);
+        }
+
+        .use-cases-header {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 4rem;
+        }
+
+        .use-cases-header h2 {
+            margin-bottom: 1rem;
+        }
+
+        .use-cases-header h2 em {
+            font-style: italic;
+            color: var(--accent-gold);
+        }
+
+        .use-cases-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .use-case-card {
+            background: #fff;
+            padding: 2rem 1.75rem;
+            border-radius: 1.25rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .use-case-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.07);
+        }
+
+        .use-case-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .use-case-icon .material-symbols-outlined {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .use-case-icon.fitness { background: linear-gradient(135deg, #ff6b6b, #ee5a5a); }
+        .use-case-icon.language { background: linear-gradient(135deg, #6b9fff, #5a8aee); }
+        .use-case-icon.wellness { background: linear-gradient(135deg, #9b6bff, #8a5aee); }
+        .use-case-icon.research { background: linear-gradient(135deg, #ffa06b, #ee8a5a); }
+        .use-case-icon.assistant { background: linear-gradient(135deg, #6bffc9, #4abe8a); }
+        .use-case-icon.companion { background: linear-gradient(135deg, #ff6bb5, #ee5aa0); }
+        .use-case-icon.health { background: linear-gradient(135deg, #ff6b6b, #ee5a5a); }
+        .use-case-icon.cooking { background: linear-gradient(135deg, #ffc46b, #eeb05a); }
+
+        .use-case-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .use-case-card > p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+            flex-grow: 1;
+        }
+
+        .use-case-prompts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .use-case-prompt {
+            background: var(--bg-warm);
+            color: var(--text-dark);
+            padding: 0.35rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 1024px) {
+            .use-cases-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .use-cases-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Design Philosophy */
@@ -1235,10 +1437,6 @@
                 justify-content: center;
             }
 
-            .nav-links a {
-                display: none;
-            }
-
             .design-grid {
                 grid-template-columns: 1fr;
             }
@@ -1377,14 +1575,29 @@
 <body>
     <nav class="navbar">
         <div class="logo">SmartLoop</div>
-        <div class="nav-links">
-            <a href="#voice-ai">Voice AI</a>
-            <a href="#privacy">Privacy</a>
-            <a href="#design">Design</a>
-            <a href="#collection">Collection</a>
-            <button class="nav-btn">Join Waitlist</button>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#use-cases">What It Does</a>
+                <a href="#voice-ai">Voice AI</a>
+                <a href="#design">Design</a>
+                <a href="#privacy">Privacy</a>
+                <a href="#specs">Specs</a>
+                <button class="nav-btn">Join Waitlist</button>
+            </div>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
         </div>
     </nav>
+    <div class="nav-mobile-overlay" id="nav-mobile-overlay"></div>
+    <div class="nav-mobile" id="nav-mobile">
+        <a href="#use-cases">What It Does</a>
+        <a href="#voice-ai">Voice AI</a>
+        <a href="#design">Design</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#specs">Specs</a>
+        <button class="nav-btn">Join Waitlist</button>
+    </div>
 
     <header class="hero">
         <div class="hero-content">
@@ -1393,7 +1606,7 @@
             <p class="hero-subtitle">SmartLoop tracks your health around the clock and listens to your life — when you choose to share or continuously if you prefer. This deep personal context transforms ChatGPT, Gemini, and Grok into something entirely new: a voice AI assistant that truly understands your health, your routines, and what's best for you.</p>
             <div class="hero-cta">
                 <button class="btn-primary">Join the Waitlist</button>
-                <a href="#voice-ai" class="btn-secondary">See How It Learns You <span>→</span></a>
+                <a href="#use-cases" class="btn-secondary">See What It Can Do <span>→</span></a>
             </div>
             <div class="hero-features">
                 <div class="hero-feature">
@@ -1415,11 +1628,117 @@
         </div>
     </header>
 
+    <!-- Use Cases -->
+    <section id="use-cases" class="use-cases">
+        <div class="use-cases-header">
+            <h2>One band. A hundred <em>roles.</em></h2>
+            <p>SmartLoop knows your body, your routines, and your life — so it becomes whatever you need. Just say it.</p>
+        </div>
+        <div class="use-cases-grid">
+            <div class="use-case-card">
+                <div class="use-case-icon fitness">
+                    <span class="material-symbols-outlined">fitness_center</span>
+                </div>
+                <h3>Your Fitness Coach</h3>
+                <p>Reads your real-time heart rate, recovery, and sleep. Gives training advice based on how your body actually feels — not a generic plan.</p>
+                <div class="use-case-prompts">
+                    <span class="use-case-prompt">"Should I run today?"</span>
+                    <span class="use-case-prompt">"Am I overtraining?"</span>
+                    <span class="use-case-prompt">"How's my recovery?"</span>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <div class="use-case-icon language">
+                    <span class="material-symbols-outlined">translate</span>
+                </div>
+                <h3>Your Language Tutor</h3>
+                <p>Practice real conversations during walks, commutes, or chores. The AI adapts to your level, corrects pronunciation, and builds vocabulary naturally.</p>
+                <div class="use-case-prompts">
+                    <span class="use-case-prompt">"Teach me Spanish"</span>
+                    <span class="use-case-prompt">"Quiz me on verbs"</span>
+                    <span class="use-case-prompt">"How do I say this in French?"</span>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <div class="use-case-icon wellness">
+                    <span class="material-symbols-outlined">self_improvement</span>
+                </div>
+                <h3>Your Wellness Ally</h3>
+                <p>Senses rising stress in your vitals before you fully feel it. Guides breathing, offers perspective, or simply listens — anytime, no appointment needed.</p>
+                <div class="use-case-prompts">
+                    <span class="use-case-prompt">"I feel overwhelmed"</span>
+                    <span class="use-case-prompt">"Help me calm down"</span>
+                    <span class="use-case-prompt">"Talk me through this"</span>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <div class="use-case-icon research">
+                    <span class="material-symbols-outlined">travel_explore</span>
+                </div>
+                <h3>Your Deep Researcher</h3>
+                <p>Get thorough, well-reasoned answers on any topic. Summarize articles, compare options, explore complex ideas — all by voice.</p>
+                <div class="use-case-prompts">
+                    <span class="use-case-prompt">"Research electric cars for me"</span>
+                    <span class="use-case-prompt">"Explain CRISPR simply"</span>
+                    <span class="use-case-prompt">"Compare these two"</span>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <div class="use-case-icon assistant">
+                    <span class="material-symbols-outlined">task_alt</span>
+                </div>
+                <h3>Your Daily Assistant</h3>
+                <p>Manage your day without touching your phone. Reminders, emails, calendar, shopping lists, notes — all hands-free.</p>
+                <div class="use-case-prompts">
+                    <span class="use-case-prompt">"Remind me at 3pm"</span>
+                    <span class="use-case-prompt">"Draft an email to Sarah"</span>
+                    <span class="use-case-prompt">"Add milk to my list"</span>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <div class="use-case-icon companion">
+                    <span class="material-symbols-outlined">forum</span>
+                </div>
+                <h3>Someone to Talk To</h3>
+                <p>Chat about your day, share ideas, vent, or just have fun. An AI that knows your life, remembers your interests, and always has time.</p>
+                <div class="use-case-prompts">
+                    <span class="use-case-prompt">"I had a rough day"</span>
+                    <span class="use-case-prompt">"Tell me something fun"</span>
+                    <span class="use-case-prompt">"Let's brainstorm"</span>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <div class="use-case-icon health">
+                    <span class="material-symbols-outlined">monitor_heart</span>
+                </div>
+                <h3>Your Health Advisor</h3>
+                <p>Combines real-time vitals with everything you've shared. Spots trends you'd miss, explains what your body is saying, gives early warnings.</p>
+                <div class="use-case-prompts">
+                    <span class="use-case-prompt">"Why am I tired lately?"</span>
+                    <span class="use-case-prompt">"How's my sleep trend?"</span>
+                    <span class="use-case-prompt">"Am I getting sick?"</span>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <div class="use-case-icon cooking">
+                    <span class="material-symbols-outlined">soup_kitchen</span>
+                </div>
+                <h3>Your Cooking Companion</h3>
+                <p>Suggests meals, walks you through recipes step by step while your hands are busy, and tracks what you eat — just by talking.</p>
+                <div class="use-case-prompts">
+                    <span class="use-case-prompt">"What should I cook?"</span>
+                    <span class="use-case-prompt">"Guide me through this recipe"</span>
+                    <span class="use-case-prompt">"What did I eat today?"</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Manifesto -->
     <section class="manifesto">
         <div class="manifesto-content">
-            <h2>Two ways it learns<br><em>who you are.</em></h2>
-            <p class="manifesto-text">Medical-grade sensors silently track your heart rate, HRV, blood oxygen, sleep, and stress — 24/7. The always-on microphone captures what's happening in your life: what you ate, how you're feeling, that meeting that went sideways. You choose how much to share. When you talk to ChatGPT, Gemini, or Grok through SmartLoop, they don't just hear your question — they understand your context. That's the difference between a generic chatbot and a personal assistant who knows what you need before you finish asking.</p>
+            <h2>How does it know<br><em>all of this?</em></h2>
+            <p class="manifesto-text">Two channels, always working. Medical-grade sensors track your heart rate, HRV, blood oxygen, sleep, and stress around the clock. The always-on microphone captures what's happening in your life — what you ate, how you're feeling, that meeting that went sideways. You choose how much to share: log moments when you want, or turn on continuous listening. When you talk to ChatGPT, Gemini, or Grok through SmartLoop, they understand your full context. That's the difference between a chatbot and a personal assistant who truly knows you.</p>
         </div>
     </section>
 
@@ -1456,7 +1775,7 @@
                     <span class="material-symbols-outlined">diamond</span>
                 </div>
                 <h3>Bijouterie Aesthetic</h3>
-                <p>Looks like a handcrafted bracelet from a boutique. Works like the most advanced health tracker ever made.</p>
+                <p>Looks like a handcrafted bracelet from a boutique. Works like the most advanced AI wearable ever made.</p>
             </div>
         </div>
     </section>
@@ -1545,7 +1864,7 @@
                         <span class="material-symbols-outlined">record_voice_over</span>
                     </div>
                     <h3>Just Say It. It Responds.</h3>
-                    <p>Speak naturally and your band answers — no phone, no screen, no button. Choose ChatGPT, Gemini, or Grok as your default voice AI or switch anytime. Your AI already knows your heart rate, sleep, stress, and what's happening in your life. Every answer is shaped by that context. Battery holds up to 48 hours in continuous listening mode.</p>
+                    <p>Speak naturally and your band answers — no phone, no screen, no button. Choose ChatGPT, Gemini, or Grok as your default voice AI or switch anytime. Your AI already knows your heart rate, sleep, stress, and what's happening in your life. Every answer is shaped by that personal context. Battery holds up to 48 hours in continuous listening mode.</p>
                     <div class="voice-examples">
                         <span class="voice-example">"Should I work out today?"</span>
                         <span class="voice-example">"Why am I so tired?"</span>
@@ -1572,46 +1891,10 @@
             </div>
             <div class="voice-card">
                 <div class="voice-card-icon">
-                    <span class="material-symbols-outlined">travel_explore</span>
-                </div>
-                <h3>Deep Research On Demand</h3>
-                <p>Ask your AI to research any topic in depth. Get summaries, find information online, explore complex subjects — all through a natural voice conversation.</p>
-                <div class="voice-examples">
-                    <span class="voice-example">"Research hiking trails nearby"</span>
-                    <span class="voice-example">"Latest news on AI"</span>
-                    <span class="voice-example">"How does blockchain work?"</span>
-                </div>
-            </div>
-            <div class="voice-card">
-                <div class="voice-card-icon">
-                    <span class="material-symbols-outlined">task_alt</span>
-                </div>
-                <h3>Your Voice-Controlled Assistant</h3>
-                <p>Create reminders, draft and send emails, manage your schedule, take notes — all hands-free. Your AI handles tasks so you stay focused on what matters.</p>
-                <div class="voice-examples">
-                    <span class="voice-example">"Remind me to call mom"</span>
-                    <span class="voice-example">"Draft an email"</span>
-                    <span class="voice-example">"What's on my calendar?"</span>
-                </div>
-            </div>
-            <div class="voice-card">
-                <div class="voice-card-icon">
-                    <span class="material-symbols-outlined">school</span>
-                </div>
-                <h3>Learn Anything, Anytime</h3>
-                <p>Practice a new language, master a new skill, or explore any topic. Your AI is a patient teacher that's always available — just start talking.</p>
-                <div class="voice-examples">
-                    <span class="voice-example">"Teach me Spanish"</span>
-                    <span class="voice-example">"Explain relativity"</span>
-                    <span class="voice-example">"Quiz me on history"</span>
-                </div>
-            </div>
-            <div class="voice-card">
-                <div class="voice-card-icon">
                     <span class="material-symbols-outlined">favorite</span>
                 </div>
-                <h3>It Knows Your Body</h3>
-                <p>Because it tracks your vitals 24/7, your AI sees what you can't — stress building before you feel it, recovery patterns, sleep debt. Ask how you're doing and get answers grounded in real data, not guesswork.</p>
+                <h3>It Reads Your Body</h3>
+                <p>Sensors track your vitals 24/7 — heart rate, HRV, sleep, blood oxygen, skin temperature. Your AI sees stress building before you feel it, spots recovery patterns, and catches sleep debt. Every answer is grounded in real biometric data.</p>
                 <div class="voice-examples">
                     <span class="voice-example">"How did I sleep?"</span>
                     <span class="voice-example">"Am I recovered enough?"</span>
@@ -1620,10 +1903,10 @@
             </div>
             <div class="voice-card">
                 <div class="voice-card-icon">
-                    <span class="material-symbols-outlined">mic</span>
+                    <span class="material-symbols-outlined">hearing</span>
                 </div>
-                <h3>It Knows Your Life</h3>
-                <p>Share what's happening — a meal, a mood, a stressful call — or let it listen continuously. The more context your AI has about your daily life, the more personal and useful every conversation becomes.</p>
+                <h3>It Hears Your Life</h3>
+                <p>Share what's happening — a meal, a mood, a stressful call — or turn on continuous listening and let it absorb your day. The more context it has, the more personal and useful every conversation becomes. You control how much it hears.</p>
                 <div class="voice-examples">
                     <span class="voice-example">"Had coffee at 3pm"</span>
                     <span class="voice-example">"Feeling anxious"</span>
@@ -1816,7 +2099,7 @@
     </section>
 
     <!-- Specs -->
-    <section class="specs-section">
+    <section id="specs" class="specs-section">
         <div class="specs-header">
             <h2>Specifications</h2>
         </div>

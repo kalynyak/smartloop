@@ -32,8 +32,50 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth'
                 });
             }
+            // Close mobile menu when nav link clicked
+            const navMobile = document.getElementById('nav-mobile');
+            if (navMobile && navMobile.classList.contains('active')) {
+                navMobile.classList.remove('active');
+                document.getElementById('nav-mobile-overlay').classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
     });
+
+    // Hamburger menu
+    const navHamburger = document.getElementById('nav-hamburger');
+    const navMobile = document.getElementById('nav-mobile');
+    const navMobileOverlay = document.getElementById('nav-mobile-overlay');
+    if (navHamburger && navMobile && navMobileOverlay) {
+        const hamburgerIcon = navHamburger.querySelector('.material-symbols-outlined');
+        function openMobileMenu() {
+            navMobile.classList.add('active');
+            navMobileOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            if (hamburgerIcon) hamburgerIcon.textContent = 'close';
+        }
+        function closeMobileMenu() {
+            navMobile.classList.remove('active');
+            navMobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            if (hamburgerIcon) hamburgerIcon.textContent = 'menu';
+        }
+        function toggleMobileMenu() {
+            if (navMobile.classList.contains('active')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+        navHamburger.addEventListener('click', toggleMobileMenu);
+        navMobileOverlay.addEventListener('click', closeMobileMenu);
+        navMobile.querySelector('.nav-btn')?.addEventListener('click', closeMobileMenu);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMobile.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+    }
 
     // Intersection Observer for Animations
     const observer = new IntersectionObserver((entries) => {
@@ -44,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.feature-card, .band-item, .spec-column, .privacy-card').forEach(el => {
+    document.querySelectorAll('.feature-card, .band-item, .spec-column, .privacy-card, .use-case-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'all 0.6s ease-out';
