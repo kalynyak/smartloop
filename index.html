@@ -712,18 +712,49 @@
             gap: 1rem;
         }
 
-        .led-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
+        .led-matrix {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(7, 1fr);
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            gap: 2px;
+            background: #0a0a0a;
+            border-radius: 6px;
+            padding: 4px;
+            border: 1px solid rgba(255,255,255,0.08);
         }
 
-        .led-dot.time { background: #FFE4B5; box-shadow: 0 0 8px #FFE4B5; }
-        .led-dot.recording { background: #87CEEB; box-shadow: 0 0 8px #87CEEB; animation: led-pulse 1s infinite; }
-        .led-dot.health { background: #98FB98; box-shadow: 0 0 8px #98FB98; }
-        .led-dot.alert { background: #FFB6C1; box-shadow: 0 0 8px #FFB6C1; }
+        .led-matrix .px {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 1px;
+            background: rgba(255,255,255,0.04);
+        }
 
-        .led-state span {
+        .led-matrix .px.on {
+            border-radius: 1px;
+        }
+
+        .led-matrix.time .px.on { background: #FFE4B5; box-shadow: 0 0 3px rgba(255,228,181,0.6); }
+        .led-matrix.recording .px.on { background: #87CEEB; box-shadow: 0 0 3px rgba(135,206,235,0.6); }
+        .led-matrix.health .px.on { background: #98FB98; box-shadow: 0 0 3px rgba(152,251,152,0.6); }
+        .led-matrix.alert .px.on { background: #FFB6C1; box-shadow: 0 0 3px rgba(255,182,193,0.6); }
+
+        .led-matrix.recording .px.on {
+            animation: matrix-pulse 1.2s ease-in-out infinite;
+        }
+        .led-matrix.recording .px.on:nth-child(odd) {
+            animation-delay: 0.15s;
+        }
+
+        @keyframes matrix-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .led-state span:last-child {
             color: rgba(255,255,255,0.7);
             font-size: 0.85rem;
         }
@@ -1640,11 +1671,11 @@
                     <span class="material-symbols-outlined">fitness_center</span>
                 </div>
                 <h3>Your Fitness Coach</h3>
-                <p>Reads your real-time heart rate, recovery, and sleep. Gives training advice based on how your body actually feels — not a generic plan.</p>
+                <p>Uses your real-time heart rate, HRV, recovery score, and sleep data to give training advice based on how your body actually feels — not a generic plan.</p>
                 <div class="use-case-prompts">
-                    <span class="use-case-prompt">"Should I run today?"</span>
-                    <span class="use-case-prompt">"Am I overtraining?"</span>
-                    <span class="use-case-prompt">"How's my recovery?"</span>
+                    <span class="use-case-prompt">"Why is my resting HR 55?"</span>
+                    <span class="use-case-prompt">"Am I recovered enough to run?"</span>
+                    <span class="use-case-prompt">"My HRV dropped — what gives?"</span>
                 </div>
             </div>
             <div class="use-case-card">
@@ -1664,11 +1695,11 @@
                     <span class="material-symbols-outlined">self_improvement</span>
                 </div>
                 <h3>Your Wellness Ally</h3>
-                <p>Senses rising stress in your vitals before you fully feel it. Guides breathing, offers perspective, or simply listens — anytime, no appointment needed.</p>
+                <p>Detects rising stress through heart rate and HRV changes before you fully feel it. Guides breathing, offers perspective, or simply listens — anytime, no appointment needed.</p>
                 <div class="use-case-prompts">
-                    <span class="use-case-prompt">"I feel overwhelmed"</span>
-                    <span class="use-case-prompt">"Help me calm down"</span>
-                    <span class="use-case-prompt">"Talk me through this"</span>
+                    <span class="use-case-prompt">"My stress is spiking, help"</span>
+                    <span class="use-case-prompt">"Guide me through breathing"</span>
+                    <span class="use-case-prompt">"Why is my heart rate high?"</span>
                 </div>
             </div>
             <div class="use-case-card">
@@ -1712,11 +1743,11 @@
                     <span class="material-symbols-outlined">monitor_heart</span>
                 </div>
                 <h3>Your Health Advisor</h3>
-                <p>Combines real-time vitals with everything you've shared. Spots trends you'd miss, explains what your body is saying, gives early warnings.</p>
+                <p>Combines real-time vitals — heart rate, SpO2, skin temperature, sleep stages — with everything you've shared. Spots trends you'd miss and explains what your body is telling you.</p>
                 <div class="use-case-prompts">
-                    <span class="use-case-prompt">"Why am I tired lately?"</span>
-                    <span class="use-case-prompt">"How's my sleep trend?"</span>
-                    <span class="use-case-prompt">"Am I getting sick?"</span>
+                    <span class="use-case-prompt">"Why did my sleep score drop to 65?"</span>
+                    <span class="use-case-prompt">"My SpO2 was 94% last night"</span>
+                    <span class="use-case-prompt">"My temp is up — am I sick?"</span>
                 </div>
             </div>
             <div class="use-case-card">
@@ -1724,7 +1755,7 @@
                     <span class="material-symbols-outlined">soup_kitchen</span>
                 </div>
                 <h3>Your Cooking Companion</h3>
-                <p>Suggests meals, walks you through recipes step by step while your hands are busy, and tracks what you eat — just by talking.</p>
+                <p>Suggests meals based on your activity level and calories burned, walks you through recipes step by step while your hands are busy — just by talking.</p>
                 <div class="use-case-prompts">
                     <span class="use-case-prompt">"What should I cook?"</span>
                     <span class="use-case-prompt">"Guide me through this recipe"</span>
@@ -1796,7 +1827,9 @@
                             </div>
                         </div>
                         <div class="tech-layer">
-                            <div class="layer-indicator led"></div>
+                            <div class="layer-indicator led">
+                                <span class="material-symbols-outlined">grid_on</span>
+                            </div>
                             <div class="layer-text">
                                 <h4>Hidden LED Array</h4>
                                 <p>Glows softly through the weave for time & status</p>
@@ -1827,23 +1860,59 @@
                 <h2>It learns everything. <em>You see nothing.</em></h2>
                 <p>Every component is engineered to disappear. Sensors silently read your body. The always-on microphone hears what's happening in your day. The speaker responds with AI's own voice. LEDs glow through the textile to show status — all without any visible display.</p>
                 <div class="led-indicator-demo">
-                    <h4>What the LEDs communicate:</h4>
+                    <h4>What the display shows:</h4>
                     <div class="led-states">
                         <div class="led-state">
-                            <span class="led-dot time"></span>
-                            <span>Soft amber — check the time</span>
+                            <!-- Clock icon: 7x7 pixel grid -->
+                            <div class="led-matrix time">
+                                <i class="px"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px"></i>
+                                <i class="px on"></i><i class="px"></i><i class="px"></i><i class="px"></i><i class="px"></i><i class="px"></i><i class="px on"></i>
+                                <i class="px on"></i><i class="px"></i><i class="px"></i><i class="px on"></i><i class="px"></i><i class="px"></i><i class="px on"></i>
+                                <i class="px on"></i><i class="px"></i><i class="px"></i><i class="px on"></i><i class="px on"></i><i class="px"></i><i class="px on"></i>
+                                <i class="px on"></i><i class="px"></i><i class="px"></i><i class="px"></i><i class="px"></i><i class="px"></i><i class="px on"></i>
+                                <i class="px on"></i><i class="px"></i><i class="px"></i><i class="px"></i><i class="px"></i><i class="px"></i><i class="px on"></i>
+                                <i class="px"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px"></i>
+                            </div>
+                            <span>Time — tap to see current time</span>
                         </div>
                         <div class="led-state">
-                            <span class="led-dot recording"></span>
-                            <span>Pulsing blue — AI conversation active</span>
+                            <!-- Sound wave icon: 7x7 pixel grid -->
+                            <div class="led-matrix recording">
+                                <i class="px"></i><i class="px"></i><i class="px"></i><i class="px on"></i><i class="px"></i><i class="px"></i><i class="px"></i>
+                                <i class="px"></i><i class="px on"></i><i class="px"></i><i class="px on"></i><i class="px"></i><i class="px on"></i><i class="px"></i>
+                                <i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i>
+                                <i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i>
+                                <i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i>
+                                <i class="px"></i><i class="px on"></i><i class="px"></i><i class="px on"></i><i class="px"></i><i class="px on"></i><i class="px"></i>
+                                <i class="px"></i><i class="px"></i><i class="px"></i><i class="px on"></i><i class="px"></i><i class="px"></i><i class="px"></i>
+                            </div>
+                            <span>Wave animation — AI conversation active</span>
                         </div>
                         <div class="led-state">
-                            <span class="led-dot health"></span>
-                            <span>Gentle green — listening & ready</span>
+                            <!-- Microphone icon: 7x7 pixel grid -->
+                            <div class="led-matrix health">
+                                <i class="px"></i><i class="px"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px"></i><i class="px"></i>
+                                <i class="px"></i><i class="px"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px"></i><i class="px"></i>
+                                <i class="px"></i><i class="px"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px"></i><i class="px"></i>
+                                <i class="px"></i><i class="px on"></i><i class="px"></i><i class="px on"></i><i class="px"></i><i class="px on"></i><i class="px"></i>
+                                <i class="px"></i><i class="px"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px"></i><i class="px"></i>
+                                <i class="px"></i><i class="px"></i><i class="px"></i><i class="px on"></i><i class="px"></i><i class="px"></i><i class="px"></i>
+                                <i class="px"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px"></i>
+                            </div>
+                            <span>Listening icon — ready for your voice</span>
                         </div>
                         <div class="led-state">
-                            <span class="led-dot alert"></span>
-                            <span>Soft rose — something needs attention</span>
+                            <!-- Bell icon: 7x7 pixel grid -->
+                            <div class="led-matrix alert">
+                                <i class="px"></i><i class="px"></i><i class="px"></i><i class="px on"></i><i class="px"></i><i class="px"></i><i class="px"></i>
+                                <i class="px"></i><i class="px"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px"></i><i class="px"></i>
+                                <i class="px"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px"></i>
+                                <i class="px"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px"></i>
+                                <i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i><i class="px on"></i>
+                                <i class="px"></i><i class="px"></i><i class="px"></i><i class="px"></i><i class="px"></i><i class="px"></i><i class="px"></i>
+                                <i class="px"></i><i class="px"></i><i class="px"></i><i class="px on"></i><i class="px"></i><i class="px"></i><i class="px"></i>
+                            </div>
+                            <span>Notification icons — reminders, alerts, messages</span>
                         </div>
                     </div>
                 </div>
