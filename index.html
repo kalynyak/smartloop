@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartLoop - Where Jewelry Meets Intelligence</title>
+    <title>SmartLoop - The AI Band That Knows You</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -787,6 +787,84 @@
             line-height: 1.6;
         }
 
+        /* Privacy Section */
+        .privacy-section {
+            padding: 8rem 5%;
+            background: var(--bg-dark);
+            color: #fff;
+        }
+
+        .privacy-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 5rem;
+        }
+
+        .privacy-header h2 {
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .privacy-header h2 em {
+            font-style: italic;
+            color: var(--accent-gold);
+        }
+
+        .privacy-header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1.1rem;
+        }
+
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .privacy-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 2.5rem 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .privacy-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255,255,255,0.07);
+        }
+
+        .privacy-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(201, 168, 108, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .privacy-icon .material-symbols-outlined {
+            font-size: 1.75rem;
+            color: var(--accent-gold);
+        }
+
+        .privacy-card h3 {
+            color: #fff;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .privacy-card p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
         /* Sensors Section */
         .sensors-section {
             padding: 8rem 5%;
@@ -1120,6 +1198,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .privacy-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .specs-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1170,6 +1252,10 @@
             }
 
             .sensors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .privacy-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1292,9 +1378,9 @@
     <nav class="navbar">
         <div class="logo">SmartLoop</div>
         <div class="nav-links">
+            <a href="#ai-chat">AI Chat</a>
+            <a href="#privacy">Privacy</a>
             <a href="#design">Design</a>
-            <a href="#voice">Voice</a>
-            <a href="#insights">Insights</a>
             <a href="#collection">Collection</a>
             <button class="nav-btn">Join Waitlist</button>
         </div>
@@ -1303,20 +1389,20 @@
     <header class="hero">
         <div class="hero-content">
             <div class="hero-badge">Now in Development</div>
-            <h1>Less Gadget.<br>More <em>You.</em></h1>
-            <p class="hero-subtitle">The screen-free fitness tracker with voice logs. Track heart rate, HRV, sleep, and SpO2 — then tap to record what you ate, how you slept, or why you're stressed. AI analyzes both to reveal patterns you'd never find on your own.</p>
+            <h1>It Knows You.<br>Like No One <em>Else.</em></h1>
+            <p class="hero-subtitle">SmartLoop tracks your health around the clock and listens to your life — when you choose to share or continuously if you prefer. This deep personal context transforms ChatGPT, Gemini, and Grok into something entirely new: a voice AI assistant that truly understands your health, your routines, and what's best for you.</p>
             <div class="hero-cta">
                 <button class="btn-primary">Join the Waitlist</button>
-                <a href="#voice" class="btn-secondary">How Voice Logs Work <span>→</span></a>
+                <a href="#ai-chat" class="btn-secondary">See How It Learns You <span>→</span></a>
             </div>
             <div class="hero-features">
                 <div class="hero-feature">
-                    <span class="hero-feature-value">∞</span>
-                    <span class="hero-feature-label">Voice Logs</span>
+                    <span class="hero-feature-value">24/7</span>
+                    <span class="hero-feature-label">Learning You</span>
                 </div>
                 <div class="hero-feature">
-                    <span class="hero-feature-value">7</span>
-                    <span class="hero-feature-label">Day Battery</span>
+                    <span class="hero-feature-value">48h</span>
+                    <span class="hero-feature-label">Listening Mode</span>
                 </div>
                 <div class="hero-feature">
                     <span class="hero-feature-value">26g</span>
@@ -1332,8 +1418,8 @@
     <!-- Manifesto -->
     <section class="manifesto">
         <div class="manifesto-content">
-            <h2>All the tracking you expect.<br><em>Plus the context only you can provide.</em></h2>
-            <p class="manifesto-text">SmartLoop does everything a premium fitness tracker does — continuous heart rate, HRV, blood oxygen, skin temperature, sleep stages, and workout detection. But it goes further. Tap to add voice context: what you ate, how you felt, what stressed you out. AI combines your biometric data with your lived experience to reveal insights no other tracker can.</p>
+            <h2>Two ways it learns<br><em>who you are.</em></h2>
+            <p class="manifesto-text">Medical-grade sensors silently track your heart rate, HRV, blood oxygen, sleep, and stress — 24/7. The always-on microphone captures what's happening in your life: what you ate, how you're feeling, that meeting that went sideways. You choose how much to share. When you talk to ChatGPT, Gemini, or Grok through SmartLoop, they don't just hear your question — they understand your context. That's the difference between a generic chatbot and a personal assistant who knows what you need before you finish asking.</p>
         </div>
     </section>
 
@@ -1362,8 +1448,8 @@
                 <div class="design-icon">
                     <span class="material-symbols-outlined">visibility_off</span>
                 </div>
-                <h3>Hidden Display</h3>
-                <p>Subtle LEDs glow through the fabric weave. Time, notifications, and health status — without a screen.</p>
+                <h3>Hidden Display & Audio</h3>
+                <p>Subtle LEDs glow through the fabric. Built-in microphone and speaker let you chat with AI hands-free — no screen needed.</p>
             </div>
             <div class="design-card">
                 <div class="design-icon">
@@ -1399,6 +1485,15 @@
                         </div>
                         <div class="tech-layer">
                             <div class="layer-indicator sensor">
+                                <span class="material-symbols-outlined">mic</span>
+                            </div>
+                            <div class="layer-text">
+                                <h4>Always-On Microphone & Speaker</h4>
+                                <p>Bidirectional voice for real-time AI conversations</p>
+                            </div>
+                        </div>
+                        <div class="tech-layer">
+                            <div class="layer-indicator sensor">
                                 <span class="material-symbols-outlined">sensors</span>
                             </div>
                             <div class="layer-text">
@@ -1410,8 +1505,8 @@
                 </div>
             </div>
             <div class="hidden-tech-text">
-                <h2>Pinnacle of technology. <em>Disguised as art.</em></h2>
-                <p>Every component is engineered to disappear. The LEDs shine through the woven textile, creating a soft glow that tells time and shows your health status — without any visible display. Press the hidden button to record. That's it.</p>
+                <h2>It learns everything. <em>You see nothing.</em></h2>
+                <p>Every component is engineered to disappear. Sensors silently read your body. The always-on microphone hears what's happening in your day. The speaker responds with AI's own voice. LEDs glow through the textile to show status — all without any visible display.</p>
                 <div class="led-indicator-demo">
                     <h4>What the LEDs communicate:</h4>
                     <div class="led-states">
@@ -1421,11 +1516,11 @@
                         </div>
                         <div class="led-state">
                             <span class="led-dot recording"></span>
-                            <span>Pulsing blue — voice recording active</span>
+                            <span>Pulsing blue — AI conversation active</span>
                         </div>
                         <div class="led-state">
                             <span class="led-dot health"></span>
-                            <span>Gentle green — all vitals normal</span>
+                            <span>Gentle green — listening & ready</span>
                         </div>
                         <div class="led-state">
                             <span class="led-dot alert"></span>
@@ -1437,25 +1532,25 @@
         </div>
     </section>
 
-    <!-- Voice-First Section -->
-    <section id="voice" class="voice-first">
+    <!-- AI Chat Section -->
+    <section id="ai-chat" class="voice-first">
         <div class="voice-header">
-            <h2>Your voice is the <em>missing data.</em></h2>
-            <p>Sensors capture what happens in your body. Voice captures what happens in your life. Together, they tell the complete story of your health.</p>
+            <h2>Now talk to AI that<br>actually <em>knows you.</em></h2>
+            <p>Because SmartLoop understands your health, habits, and daily life, every voice conversation with ChatGPT, Gemini, and Grok becomes deeply personal. It doesn't just answer — it advises, knowing your full context.</p>
         </div>
         <div class="voice-grid">
             <div class="voice-card featured">
                 <div class="voice-card-content">
                     <div class="voice-card-icon">
-                        <span class="material-symbols-outlined">mic</span>
+                        <span class="material-symbols-outlined">record_voice_over</span>
                     </div>
-                    <h3>One Tap to Capture Context</h3>
-                    <p>Press the hidden button and speak. Log meals, symptoms, mood, stress, medications, energy levels — anything that might affect your health. SmartLoop transcribes, timestamps, and correlates your voice with biometric data automatically.</p>
+                    <h3>Your Personal AI. Always Ready.</h3>
+                    <p>Just speak — no button press needed. Your AI already knows your heart rate is elevated, that you slept poorly last night, that you mentioned a big deadline this week. It doesn't just answer questions — it gives advice shaped by everything it knows about you. Battery holds up to 48 hours in continuous listening mode.</p>
                     <div class="voice-examples">
-                        <span class="voice-example">"Had coffee at 3pm"</span>
-                        <span class="voice-example">"Feeling anxious today"</span>
-                        <span class="voice-example">"Slept terribly"</span>
-                        <span class="voice-example">"Took my vitamins"</span>
+                        <span class="voice-example">"Should I work out today?"</span>
+                        <span class="voice-example">"Why am I so tired?"</span>
+                        <span class="voice-example">"Help me prep for my meeting"</span>
+                        <span class="voice-example">"What should I eat right now?"</span>
                     </div>
                 </div>
                 <div class="voice-visual-demo">
@@ -1470,57 +1565,69 @@
                         <div class="wave-bar"></div>
                     </div>
                     <div class="voice-transcription">
-                        <p>"Had a stressful meeting this morning. Feeling tense."</p>
-                        <span>Transcribed • 10:42 AM</span>
+                        <p>"You slept 5 hours and your HRV is low. I'd skip the gym today and do a light walk instead."</p>
+                        <span>SmartLoop AI • responding</span>
                     </div>
                 </div>
             </div>
             <div class="voice-card">
                 <div class="voice-card-icon">
-                    <span class="material-symbols-outlined">restaurant</span>
+                    <span class="material-symbols-outlined">travel_explore</span>
                 </div>
-                <h3>Nutrition & Intake</h3>
-                <p>Track what you eat, drink, and supplement without opening an app. AI extracts nutritional data and correlates with how you feel later.</p>
+                <h3>Deep Research On Demand</h3>
+                <p>Ask your AI to research any topic in depth. Get summaries, find information online, explore complex subjects — all through a natural voice conversation.</p>
                 <div class="voice-examples">
-                    <span class="voice-example">"Salad for lunch"</span>
-                    <span class="voice-example">"2L water today"</span>
-                    <span class="voice-example">"Took magnesium"</span>
+                    <span class="voice-example">"Research hiking trails nearby"</span>
+                    <span class="voice-example">"Latest news on AI"</span>
+                    <span class="voice-example">"How does blockchain work?"</span>
                 </div>
             </div>
             <div class="voice-card">
                 <div class="voice-card-icon">
-                    <span class="material-symbols-outlined">mood</span>
+                    <span class="material-symbols-outlined">task_alt</span>
                 </div>
-                <h3>Mood & Energy</h3>
-                <p>Capture emotional states throughout the day. Over time, discover what impacts your mental wellbeing and energy levels.</p>
+                <h3>Your Voice-Controlled Assistant</h3>
+                <p>Create reminders, draft and send emails, manage your schedule, take notes — all hands-free. Your AI handles tasks so you stay focused on what matters.</p>
                 <div class="voice-examples">
-                    <span class="voice-example">"Great energy"</span>
-                    <span class="voice-example">"Feeling stressed"</span>
-                    <span class="voice-example">"3pm slump"</span>
+                    <span class="voice-example">"Remind me to call mom"</span>
+                    <span class="voice-example">"Draft an email"</span>
+                    <span class="voice-example">"What's on my calendar?"</span>
                 </div>
             </div>
             <div class="voice-card">
                 <div class="voice-card-icon">
-                    <span class="material-symbols-outlined">healing</span>
+                    <span class="material-symbols-outlined">school</span>
                 </div>
-                <h3>Symptoms & Health</h3>
-                <p>Log symptoms, sleep quality, and health observations. Give your biometric data the context it needs to be meaningful.</p>
+                <h3>Learn Anything, Anytime</h3>
+                <p>Practice a new language, master a new skill, or explore any topic. Your AI is a patient teacher that's always available — just start talking.</p>
                 <div class="voice-examples">
-                    <span class="voice-example">"Headache since noon"</span>
-                    <span class="voice-example">"Woke up groggy"</span>
-                    <span class="voice-example">"Back pain today"</span>
+                    <span class="voice-example">"Teach me Spanish"</span>
+                    <span class="voice-example">"Explain relativity"</span>
+                    <span class="voice-example">"Quiz me on history"</span>
                 </div>
             </div>
             <div class="voice-card">
                 <div class="voice-card-icon">
-                    <span class="material-symbols-outlined">fitness_center</span>
+                    <span class="material-symbols-outlined">favorite</span>
                 </div>
-                <h3>Workouts & Activity</h3>
-                <p>Start workouts, mark laps, and add notes — all hands-free. Perfect when your phone isn't accessible.</p>
+                <h3>It Knows Your Body</h3>
+                <p>Because it tracks your vitals 24/7, your AI sees what you can't — stress building before you feel it, recovery patterns, sleep debt. Ask how you're doing and get answers grounded in real data, not guesswork.</p>
                 <div class="voice-examples">
-                    <span class="voice-example">"Start run"</span>
-                    <span class="voice-example">"Mark a lap"</span>
-                    <span class="voice-example">"End workout"</span>
+                    <span class="voice-example">"How did I sleep?"</span>
+                    <span class="voice-example">"Am I recovered enough?"</span>
+                    <span class="voice-example">"Is my stress getting worse?"</span>
+                </div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-card-icon">
+                    <span class="material-symbols-outlined">mic</span>
+                </div>
+                <h3>It Knows Your Life</h3>
+                <p>Share what's happening — a meal, a mood, a stressful call — or let it listen continuously. The more context your AI has about your daily life, the more personal and useful every conversation becomes.</p>
+                <div class="voice-examples">
+                    <span class="voice-example">"Had coffee at 3pm"</span>
+                    <span class="voice-example">"Feeling anxious"</span>
+                    <span class="voice-example">"Big interview tomorrow"</span>
                 </div>
             </div>
         </div>
@@ -1529,8 +1636,8 @@
     <!-- AI Correlation -->
     <section id="insights" class="ai-correlation">
         <div class="correlation-header">
-            <h2>AI Connects the Dots</h2>
-            <p>Your voice logs and sensor data combine to reveal patterns you'd never discover otherwise.</p>
+            <h2>The More It Knows, The More It Sees</h2>
+            <p>Health sensors and life context combine to reveal patterns you'd never find on your own. Your AI connects the dots between how your body feels and what's happening in your life.</p>
         </div>
         <div class="correlation-showcase">
             <div class="correlation-item">
@@ -1600,6 +1707,44 @@
                     <span class="material-symbols-outlined">lightbulb</span>
                     <p><strong>Pattern discovered:</strong> Your energy peaks the day after exercise. Monday workouts consistently correlate with your highest-rated days for mood and productivity.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy -->
+    <section id="privacy" class="privacy-section">
+        <div class="privacy-header">
+            <h2>Your Privacy Is <em>Non-Negotiable.</em></h2>
+            <p>We built SmartLoop with privacy at its core. Your conversations and health data are yours — period.</p>
+        </div>
+        <div class="privacy-grid">
+            <div class="privacy-card">
+                <div class="privacy-icon">
+                    <span class="material-symbols-outlined">shield</span>
+                </div>
+                <h3>Official AI APIs</h3>
+                <p>We use official APIs from OpenAI (ChatGPT), Google (Gemini), and xAI (Grok). These APIs are designed for enterprise use and come with strict data protection guarantees.</p>
+            </div>
+            <div class="privacy-card">
+                <div class="privacy-icon">
+                    <span class="material-symbols-outlined">model_training</span>
+                </div>
+                <h3>Never Used for Training</h3>
+                <p>Your conversations are never used to train AI models. Official API terms explicitly prohibit using your data for model improvement. Your words stay your words.</p>
+            </div>
+            <div class="privacy-card">
+                <div class="privacy-icon">
+                    <span class="material-symbols-outlined">delete_forever</span>
+                </div>
+                <h3>No Data Stored by AI</h3>
+                <p>AI providers do not store your conversations or voice data. Requests are processed in real-time and discarded. No logs, no history on their servers.</p>
+            </div>
+            <div class="privacy-card">
+                <div class="privacy-icon">
+                    <span class="material-symbols-outlined">lock</span>
+                </div>
+                <h3>Your Data, Your Device</h3>
+                <p>Health data and voice logs stay on your device and in your private iCloud. We never sell, share, or monetize your personal information. Full control is always yours.</p>
             </div>
         </div>
     </section>
@@ -1688,12 +1833,13 @@
                 </ul>
             </div>
             <div class="spec-column">
-                <h3>Interface</h3>
+                <h3>Voice & Interface</h3>
                 <ul>
+                    <li>Always-on microphone</li>
+                    <li>Speaker for AI voice</li>
                     <li>Hidden RGB LED array</li>
                     <li>Precision haptics</li>
                     <li>Concealed tactile button</li>
-                    <li>Microphone for voice</li>
                     <li>No visible display</li>
                 </ul>
             </div>
@@ -1701,10 +1847,11 @@
                 <h3>Connectivity</h3>
                 <ul>
                     <li>Bluetooth 5.3 LE</li>
+                    <li>WiFi (via iPhone)</li>
                     <li>NFC (Tesla Key)</li>
                     <li>iPhone app (iOS 16+)</li>
                     <li>HealthKit integration</li>
-                    <li>Siri Shortcuts</li>
+                    <li>ChatGPT / Gemini / Grok</li>
                 </ul>
             </div>
             <div class="spec-column">
@@ -1713,7 +1860,8 @@
                     <li>Band width: 24mm</li>
                     <li>Weight: 26g total</li>
                     <li>Water: 50m resistance</li>
-                    <li>Battery: 7-day typical</li>
+                    <li>Battery: 48h always-on</li>
+                    <li>Battery: 7-day tracking only</li>
                     <li>Magnetic charging</li>
                 </ul>
             </div>
@@ -1723,8 +1871,8 @@
     <!-- CTA -->
     <section class="cta-section">
         <div class="cta-content">
-            <h2>Ready to wear <em>invisible</em> intelligence?</h2>
-            <p>Join thousands who've signed up for early access. Be among the first to experience health tracking that looks like jewelry.</p>
+            <h2>Ready for AI that<br>actually <em>knows you?</em></h2>
+            <p>Join thousands who've signed up for early access. Be among the first to wear an AI assistant that learns your health, hears your life, and looks like jewelry.</p>
             <div class="cta-form">
                 <input type="email" placeholder="Enter your email" class="cta-input">
                 <button class="cta-submit">Join Waitlist</button>
@@ -1743,7 +1891,7 @@
                 <a href="#">Press</a>
                 <a href="#">Contact</a>
             </div>
-            <p class="footer-tagline">Designed in California. Crafted for humans.</p>
+            <p class="footer-tagline">Designed in California. Your AI, always with you.</p>
             <p>© 2026 SmartLoop. All rights reserved.</p>
         </div>
     </footer>
