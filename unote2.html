@@ -1,0 +1,2927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unote - Voice Journal with Deep AI Insights</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet">
+    <style>
+        :root {
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F7;
+            --bg-dark: #000000;
+            --text-dark: #1d1d1f;
+            --text-muted: #6e6e73;
+            --text-light: #86868b;
+            
+            /* Vibrant gradients */
+            --gradient-health: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+            --gradient-mind: linear-gradient(135deg, #9B6BFF 0%, #5B8EFF 100%);
+            --gradient-work: linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%);
+            --gradient-life: linear-gradient(135deg, #10B981 0%, #14B8A6 100%);
+            --gradient-primary: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+            --gradient-accent: linear-gradient(135deg, #F093FB 0%, #F5576C 100%);
+            
+            /* Category solid colors */
+            --color-health: #FF6B9D;
+            --color-mind: #9B6BFF;
+            --color-work: #3B82F6;
+            --color-life: #10B981;
+            
+            --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: -0.015em;
+        }
+
+        h1 {
+            font-size: clamp(2.75rem, 7vw, 5.5rem);
+            line-height: 1.07;
+            letter-spacing: -0.025em;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 5%;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 250, 250, 0.85);
+            backdrop-filter: saturate(180%) blur(25px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            top: -200px;
+            right: 20%;
+            filter: blur(50px);
+            z-index: -1;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-circle {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #FF3B30;
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.875rem;
+            font-weight: 400;
+            transition: opacity 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .nav-btn,
+        .nav-links .nav-btn {
+            background: var(--bg-dark);
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.25rem;
+            border-radius: 1.5rem;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .nav-btn:hover,
+        .nav-links .nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            color: #fff;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 5rem;
+            text-align: center;
+            background: #FAFAFA;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(155, 107, 255, 0.15) 0%, transparent 70%);
+            top: -200px;
+            left: -100px;
+            filter: blur(60px);
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.15) 0%, transparent 70%);
+            bottom: -150px;
+            right: -100px;
+            filter: blur(60px);
+            z-index: 0;
+        }
+
+        .hero-inner {
+            max-width: 1000px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.25rem;
+            background: linear-gradient(135deg, var(--text-dark) 0%, #000 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 3rem;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--bg-dark);
+            color: #fff;
+            padding: 0.9rem 2rem;
+            border-radius: 1.5rem;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary .apple-icon,
+        .cta-appstore .apple-icon {
+            flex-shrink: 0;
+        }
+
+        .btn-secondary {
+            color: #0071e3;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .btn-secondary:hover {
+            gap: 0.6rem;
+            color: #0077ED;
+        }
+
+        .btn-secondary:focus-visible {
+            outline: 3px solid #0071e3;
+            outline-offset: 2px;
+        }
+
+        /* Carousel */
+        .carousel-section {
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .carousel-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.65rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .carousel-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.65rem 1.35rem;
+            border-radius: 1.5rem;
+            border: none;
+            background: var(--bg-light);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            color: var(--text-dark);
+            pointer-events: auto;
+        }
+
+        .carousel-tab .material-symbols-outlined {
+            font-size: 1.15rem;
+        }
+
+        .carousel-tab:hover {
+            background: #E8E8ED;
+            transform: scale(1.02);
+        }
+
+        .carousel-tab.active[data-category="health"] {
+            background: var(--gradient-health);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(255, 107, 157, 0.3);
+        }
+
+        .carousel-tab.active[data-category="mind"] {
+            background: var(--gradient-mind);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(155, 107, 255, 0.3);
+        }
+
+        .carousel-tab.active[data-category="work"] {
+            background: var(--gradient-work);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .carousel-tab.active[data-category="life"] {
+            background: var(--gradient-life);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+        }
+
+        .carousel-viewport {
+            overflow: hidden;
+            border-radius: 1.5rem;
+            margin: 0 auto;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-card {
+            min-width: 100%;
+            padding: 0 0.5rem;
+            box-sizing: border-box;
+        }
+
+        .carousel-card-inner {
+            background: #fff;
+            border-radius: 1.75rem;
+            padding: 2.25rem 2.75rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0,0,0,0.08);
+            max-width: 740px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .card-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.45rem 1rem;
+            border-radius: 1.25rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .card-category .material-symbols-outlined {
+            font-size: 1rem;
+        }
+
+        .card-category.health { background: var(--gradient-health); }
+        .card-category.mind { background: var(--gradient-mind); }
+        .card-category.work { background: var(--gradient-work); }
+        .card-category.life { background: var(--gradient-life); }
+
+        .card-voice {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+            padding: 1.35rem 1.65rem;
+            background: var(--bg-light);
+            border-radius: 1.25rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .card-voice-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .card-voice-icon .material-symbols-outlined {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+        }
+
+        .card-voice p {
+            font-size: 1.0625rem;
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.55;
+            margin: 0;
+            padding-top: 0.4rem;
+            font-weight: 400;
+        }
+
+        .card-flow {
+            display: flex;
+            justify-content: center;
+            padding: 0.25rem 0;
+            opacity: 0.3;
+        }
+
+        .card-flow .material-symbols-outlined {
+            font-size: 1.35rem;
+            color: var(--text-muted);
+        }
+
+        .card-insight {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+            padding: 1.35rem 1.65rem;
+            background: linear-gradient(135deg, var(--bg-light) 0%, rgba(245, 245, 247, 0.5) 100%);
+            border-radius: 1.25rem;
+            border-left: 3px solid transparent;
+            background-image: linear-gradient(white, white), var(--gradient-primary);
+            background-origin: padding-box, border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .card-insight-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .card-insight-icon .material-symbols-outlined {
+            font-size: 1.15rem;
+            color: #fff;
+        }
+
+        .card-insight p {
+            font-size: 1rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding-top: 0.4rem;
+        }
+
+        .card-insight strong {
+            font-weight: 600;
+        }
+
+        /* Carousel Navigation */
+        .carousel-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.25rem;
+            margin-top: 1.75rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .carousel-arrow {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: var(--bg-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            pointer-events: auto;
+        }
+
+        .carousel-arrow:hover {
+            background: #E8E8ED;
+            transform: scale(1.1);
+        }
+
+        .carousel-arrow .material-symbols-outlined {
+            font-size: 1.35rem;
+        }
+
+        .carousel-dots {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .carousel-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.15);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            pointer-events: auto;
+        }
+
+        .carousel-dot.active {
+            background: var(--bg-dark);
+            width: 28px;
+            border-radius: 5px;
+        }
+
+        .carousel-counter {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            min-width: 40px;
+        }
+
+        /* Manifesto Section */
+        .manifesto {
+            padding: 8rem 5%;
+            background: var(--bg-dark);
+            color: #fff;
+            text-align: center;
+        }
+
+        .manifesto-content {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .manifesto h2 {
+            font-size: clamp(2.25rem, 5vw, 3.5rem);
+            line-height: 1.12;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .manifesto h2 em {
+            font-style: normal;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .manifesto-text {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.55;
+            max-width: 780px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Design Philosophy */
+        .design-philosophy {
+            padding: 8rem 5%;
+            background: var(--bg-white);
+        }
+
+        .design-header {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto 5rem;
+        }
+
+        .design-header p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            margin-top: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .design-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1260px;
+            margin: 0 auto;
+        }
+
+        .design-card {
+            background: var(--bg-white);
+            padding: 2.75rem 2.25rem;
+            border-radius: 1.75rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+
+        .design-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.12);
+            border-color: rgba(0,0,0,0.12);
+        }
+
+        .design-card:nth-child(1) .design-icon { background: var(--gradient-health); }
+        .design-card:nth-child(2) .design-icon { background: var(--gradient-mind); }
+        .design-card:nth-child(3) .design-icon { background: var(--gradient-work); }
+        .design-card:nth-child(4) .design-icon { background: var(--gradient-life); }
+
+        .design-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.75rem;
+        }
+
+        .design-icon .material-symbols-outlined {
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .design-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.85rem;
+            font-weight: 600;
+        }
+
+        .design-card p {
+            color: var(--text-muted);
+            font-size: 1.0625rem;
+            line-height: 1.6;
+        }
+
+        /* Hidden Tech Showcase */
+        .hidden-tech {
+            padding: 8rem 5%;
+            background: var(--bg-light);
+        }
+
+        .hidden-tech-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hidden-tech-visual {
+            position: relative;
+        }
+
+        .tech-diagram {
+            background: #fff;
+            border-radius: 2rem;
+            padding: 3rem;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .tech-layers {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .tech-layer {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.35rem 1.5rem;
+            background: var(--bg-light);
+            border-radius: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .tech-layer:hover {
+            background: #E8E8ED;
+            transform: translateX(6px);
+        }
+
+        .layer-indicator {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .layer-indicator.fabric {
+            background: var(--gradient-work);
+        }
+
+        .layer-indicator.led {
+            background: var(--gradient-mind);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .layer-indicator.led::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #4cd964;
+            border-radius: 50%;
+            animation: led-pulse 1.5s ease-in-out infinite;
+            box-shadow: 0 0 10px #4cd964;
+        }
+
+        @keyframes led-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+        }
+
+        .layer-indicator.sensor {
+            background: var(--gradient-primary);
+        }
+
+        .layer-indicator .material-symbols-outlined {
+            color: #fff;
+            font-size: 1.25rem;
+        }
+
+        .layer-text h4 {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .layer-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .hidden-tech-text {
+            max-width: 480px;
+        }
+
+        .hidden-tech-text h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .hidden-tech-text h2 em {
+            font-style: italic;
+            color: var(--accent-gold);
+        }
+
+        .hidden-tech-text > p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .led-indicator-demo {
+            background: var(--bg-dark);
+            border-radius: 1.5rem;
+            padding: 2rem;
+        }
+
+        .led-indicator-demo h4 {
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .led-states {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .led-state {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .led-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .led-dot.time { background: #FFE4B5; box-shadow: 0 0 8px #FFE4B5; }
+        .led-dot.recording { background: #87CEEB; box-shadow: 0 0 8px #87CEEB; animation: led-pulse 1s infinite; }
+        .led-dot.health { background: #98FB98; box-shadow: 0 0 8px #98FB98; }
+        .led-dot.alert { background: #FFB6C1; box-shadow: 0 0 8px #FFB6C1; }
+
+        .led-state span {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+        }
+
+        /* Voice-First Section */
+        .voice-first {
+            padding: 8rem 5%;
+            background: var(--bg-dark);
+            color: #fff;
+        }
+
+        .voice-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+        }
+
+        .voice-header h2 {
+            margin-bottom: 1rem;
+        }
+
+        .voice-header h2 em {
+            font-style: italic;
+            color: var(--accent-gold);
+        }
+
+        .voice-header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1.1rem;
+        }
+
+        .voice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .voice-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1.75rem;
+            padding: 2.75rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .voice-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .voice-card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.75rem;
+        }
+
+        .voice-card-icon .material-symbols-outlined {
+            font-size: 1.65rem;
+            color: #fff;
+        }
+
+        .voice-card h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 1.15rem;
+            font-weight: 600;
+        }
+
+        .voice-card > p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.55;
+            margin-bottom: 1.65rem;
+            font-size: 1.0625rem;
+        }
+
+        .voice-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .voice-example {
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.7);
+            padding: 0.4rem 0.85rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        /* Featured Voice Card (larger) */
+        .voice-card.featured {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: linear-gradient(135deg, rgba(201, 168, 108, 0.08) 0%, rgba(255,255,255,0.03) 100%);
+        }
+
+        .voice-card.featured .voice-card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.25rem;
+        }
+
+        .voice-card.featured .voice-card-content h3 {
+            margin-bottom: 0;
+        }
+
+        .voice-card.featured .voice-card-content p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.55;
+            font-size: 1.0625rem;
+            margin: 0;
+        }
+
+        .voice-card.featured .voice-card-content .voice-examples {
+            margin-top: 0.25rem;
+        }
+
+        .voice-visual-demo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .waveform {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            height: 60px;
+        }
+
+        .wave-bar {
+            width: 4px;
+            background: var(--accent-gold);
+            border-radius: 2px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        .wave-bar:nth-child(1) { height: 20px; animation-delay: 0s; }
+        .wave-bar:nth-child(2) { height: 35px; animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { height: 50px; animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { height: 40px; animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { height: 55px; animation-delay: 0.15s; }
+        .wave-bar:nth-child(6) { height: 30px; animation-delay: 0.25s; }
+        .wave-bar:nth-child(7) { height: 45px; animation-delay: 0.35s; }
+        .wave-bar:nth-child(8) { height: 25px; animation-delay: 0.05s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.5); }
+        }
+
+        .voice-transcription {
+            background: rgba(0,0,0,0.3);
+            padding: 1.5rem 2rem;
+            border-radius: 1rem;
+            max-width: 320px;
+        }
+
+        .voice-transcription p {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .voice-transcription span {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.75rem;
+        }
+
+        /* Chat Demo */
+        .chat-demo {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .chat-bubble {
+            padding: 1rem 1.25rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .chat-bubble.user-bubble {
+            background: rgba(201, 168, 108, 0.2);
+            color: rgba(255,255,255,0.9);
+            border-bottom-right-radius: 0.25rem;
+            align-self: flex-end;
+            max-width: 85%;
+        }
+
+        .chat-bubble.ai-bubble {
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.8);
+            border-bottom-left-radius: 0.25rem;
+            align-self: flex-start;
+            max-width: 95%;
+        }
+
+        /* AI Correlation */
+        .ai-correlation {
+            padding: 8rem 5%;
+            background: var(--bg-white);
+        }
+
+        .correlation-header {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto 5rem;
+        }
+
+        .correlation-header h2 {
+            margin-bottom: 1.25rem;
+        }
+
+        .correlation-header h2 em {
+            font-style: normal;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .correlation-header p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .correlation-showcase {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .correlation-item {
+            background: #fff;
+            border-radius: 1.75rem;
+            padding: 2.75rem;
+            margin-bottom: 1.75rem;
+            box-shadow: 0 6px 28px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .correlation-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 55px rgba(0,0,0,0.12);
+            border-color: rgba(0,0,0,0.12);
+        }
+
+        .correlation-inputs {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .correlation-input {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border-radius: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .correlation-input.sensor {
+            background: rgba(0, 122, 255, 0.08);
+            color: #0066cc;
+        }
+
+        .correlation-input.voice {
+            background: rgba(76, 217, 100, 0.08);
+            color: #2d8a4e;
+        }
+
+        .correlation-input.mind {
+            background: rgba(155, 107, 255, 0.08);
+            color: #7B4FCC;
+        }
+
+        .correlation-input.work {
+            background: rgba(255, 160, 107, 0.08);
+            color: #CC6B2D;
+        }
+
+        .correlation-input.life {
+            background: rgba(255, 200, 50, 0.08);
+            color: #9A7B1A;
+        }
+
+        .correlation-input.health {
+            background: rgba(255, 107, 107, 0.08);
+            color: #CC3D3D;
+        }
+
+        .correlation-input .material-symbols-outlined {
+            font-size: 1rem;
+        }
+
+        .correlation-plus {
+            color: var(--text-light);
+            font-size: 1.25rem;
+        }
+
+        .correlation-output {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.15rem;
+            padding: 1.5rem 1.65rem;
+            background: linear-gradient(135deg, var(--bg-light) 0%, rgba(245, 245, 247, 0.4) 100%);
+            border-radius: 1.25rem;
+            border-left: 4px solid transparent;
+            background-image: linear-gradient(white, white), var(--gradient-primary);
+            background-origin: padding-box, border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .correlation-output .material-symbols-outlined {
+            color: var(--color-mind);
+            font-size: 1.35rem;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .correlation-output p {
+            color: var(--text-dark);
+            font-size: 1.0625rem;
+            line-height: 1.55;
+        }
+
+        /* Sensors Section */
+        .sensors-section {
+            padding: 8rem 5%;
+            background: var(--bg-light);
+        }
+
+        .sensors-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 4.5rem;
+        }
+
+        .sensors-header p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            margin-top: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .sensors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .sensor-card {
+            background: #fff;
+            padding: 2.25rem;
+            border-radius: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .sensor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+            border-color: rgba(0,0,0,0.12);
+        }
+
+        .sensor-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .sensor-icon .material-symbols-outlined {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .sensor-icon.heart { background: linear-gradient(135deg, #ff6b6b, #ee5a5a); }
+        .sensor-icon.hrv { background: linear-gradient(135deg, #ffa06b, #ee8a5a); }
+        .sensor-icon.oxygen { background: linear-gradient(135deg, #6b9fff, #5a8aee); }
+        .sensor-icon.temp { background: linear-gradient(135deg, #ff6bb5, #ee5aa0); }
+        .sensor-icon.motion { background: linear-gradient(135deg, #9b6bff, #8a5aee); }
+        .sensor-icon.sleep { background: linear-gradient(135deg, #6bffc9, #5aeeb8); }
+
+        .sensor-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.65rem;
+            font-weight: 600;
+        }
+
+        .sensor-card p {
+            color: var(--text-muted);
+            font-size: 1.0625rem;
+            line-height: 1.55;
+        }
+
+        /* Collection */
+        .collection {
+            padding: 8rem 5%;
+            background: var(--bg-white);
+        }
+
+        .collection-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 4.5rem;
+        }
+
+        .collection-header p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            margin-top: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .collection-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .collection-showcase.single {
+            grid-template-columns: 1fr;
+            max-width: 850px;
+            justify-items: center;
+        }
+
+        .collection-showcase.single .collection-image {
+            max-height: 500px;
+            width: auto;
+            object-fit: contain;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .collection-line {
+            text-align: center;
+        }
+
+        .collection-line h3 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .collection-line > p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .collection-image {
+            width: 100%;
+            border-radius: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .collection-image:hover {
+            transform: scale(1.02);
+        }
+
+        .sizing-note {
+            text-align: center;
+            max-width: 560px;
+            margin: 3.5rem auto 0;
+            padding: 1.75rem 2.25rem;
+            background: var(--bg-light);
+            border-radius: 1.5rem;
+        }
+
+        .sizing-note p {
+            color: var(--text-muted);
+            font-size: 1.0625rem;
+            line-height: 1.5;
+        }
+
+        .sizing-note strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Specs */
+        .specs-section {
+            padding: 6rem 5%;
+            background: var(--bg-dark);
+            color: #fff;
+        }
+
+        .specs-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .specs-header h2 {
+            color: #fff;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .spec-column h3 {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .spec-column ul {
+            list-style: none;
+        }
+
+        .spec-column li {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 8rem 5%;
+            background: var(--bg-light);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            margin-bottom: 1.25rem;
+        }
+
+        .cta-content h2 em {
+            font-style: normal;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-content > p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            margin-bottom: 2.75rem;
+            line-height: 1.5;
+        }
+
+        .cta-form {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .cta-input {
+            padding: 1rem 1.5rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 2rem;
+            font-size: 1rem;
+            width: 300px;
+            font-family: var(--font-body);
+            background: #fff;
+        }
+
+        .cta-input:focus {
+            outline: none;
+            border-color: var(--text-dark);
+        }
+
+        .cta-submit {
+            padding: 1rem 2rem;
+            background: var(--text-dark);
+            color: #fff;
+            border: none;
+            border-radius: 2rem;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .cta-appstore {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 1.1rem 2.75rem;
+            background: var(--bg-dark);
+            color: #fff;
+            border: none;
+            border-radius: 2rem;
+            font-family: var(--font-body);
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-decoration: none;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-appstore:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-appstore:active {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Focus states for accessibility */
+        .nav-btn:focus-visible,
+        .btn-primary:focus-visible,
+        .cta-appstore:focus-visible {
+            outline: 3px solid #0071e3;
+            outline-offset: 3px;
+        }
+
+        .cta-note {
+            color: var(--text-muted);
+            font-size: 0.9375rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 5%;
+            background: var(--bg-white);
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-logo .logo-circle {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #FF3B30;
+            flex-shrink: 0;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: opacity 0.3s;
+            opacity: 0.85;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-tagline {
+            color: var(--text-light);
+            font-style: italic;
+            font-family: var(--font-display);
+        }
+
+        footer p:last-child {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .design-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hidden-tech-content {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .voice-card.featured {
+                grid-column: span 2;
+                grid-template-columns: 1fr;
+            }
+
+            .specs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sensors-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 7rem 5% 3.5rem;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.25rem, 8vw, 3.75rem);
+                margin-bottom: 1.15rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.125rem;
+                margin-bottom: 2.25rem;
+            }
+
+            .carousel-section {
+                margin-bottom: 2.25rem;
+            }
+
+            .carousel-card-inner {
+                padding: 1.75rem 1.5rem;
+            }
+
+            .carousel-tabs {
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+
+            .carousel-tab {
+                padding: 0.55rem 1rem;
+                font-size: 0.875rem;
+            }
+
+            .carousel-tab .material-symbols-outlined {
+                font-size: 1.05rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-primary {
+                width: 100%;
+                max-width: 320px;
+                justify-content: center;
+            }
+
+            .card-voice p {
+                font-size: 1rem;
+            }
+
+            .card-insight p {
+                font-size: 0.9375rem;
+            }
+
+            .card-voice {
+                padding: 1.15rem 1.35rem;
+            }
+
+            .card-insight {
+                padding: 1.15rem 1.35rem;
+            }
+
+            .nav-links a {
+                display: none;
+            }
+
+            .design-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .voice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .voice-card.featured {
+                grid-column: span 1;
+            }
+
+            .sensors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .collection-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-form {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-input {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 23, 20, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 3rem;
+            border-radius: 1.5rem;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .modal-icon {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-icon .material-symbols-outlined {
+            font-size: 3rem;
+            color: var(--accent-gold);
+        }
+
+        .modal-content h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-content > p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .modal-input {
+            padding: 1rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: var(--font-body);
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--text-dark);
+        }
+
+        .modal-submit {
+            padding: 1rem;
+            background: var(--text-dark);
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .modal-note {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><div class="logo-circle"></div>Unote</div>
+        <div class="nav-links">
+            <a href="#categories">Categories</a>
+            <a href="#insights">AI Insights</a>
+            <a href="#chat">Chat</a>
+            <a href="#healthkit">HealthKit</a>
+            <a href="https://apps.apple.com/us/app/unote-transcribe-audio-to-text/id6741094680" class="nav-btn" target="_blank" rel="noopener">Download Free</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-inner">
+            <h1>You talk about your day.<br>AI finds what you <em>missed.</em></h1>
+            <p class="hero-subtitle">Unote turns voice notes into deep insights across health, mind, work, and life. Here's what it discovers from everyday thoughts.</p>
+
+            <div class="carousel-section">
+                <div class="carousel-tabs">
+                    <button class="carousel-tab active" data-category="health">
+                        <span class="material-symbols-outlined">favorite</span> Health
+                    </button>
+                    <button class="carousel-tab" data-category="mind">
+                        <span class="material-symbols-outlined">psychology</span> Mind
+                    </button>
+                    <button class="carousel-tab" data-category="work">
+                        <span class="material-symbols-outlined">work</span> Work
+                    </button>
+                    <button class="carousel-tab" data-category="life">
+                        <span class="material-symbols-outlined">sunny</span> Life
+                    </button>
+                </div>
+
+                <div class="carousel-viewport">
+                    <div class="carousel-track">
+
+                        <!-- HEALTH 1 -->
+                        <div class="carousel-card" data-category="health">
+                            <div class="carousel-card-inner">
+                                <div class="card-category health">
+                                    <span class="material-symbols-outlined">favorite</span> Health
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Took magnesium before bed last three nights&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p><strong>Sleep improved 23%</strong> on magnesium nights. Deep sleep up 18 min vs. baseline. Pattern consistent across 3 weeks of data.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HEALTH 2 -->
+                        <div class="carousel-card" data-category="health">
+                            <div class="carousel-card-inner">
+                                <div class="card-category health">
+                                    <span class="material-symbols-outlined">favorite</span> Health
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Headache again &mdash; third one this week&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p><strong>Headaches cluster</strong> in weeks with no hydration notes and 8+ hours of screen time. Your last water-related entry was 5 days ago.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HEALTH 3 -->
+                        <div class="carousel-card" data-category="health">
+                            <div class="carousel-card-inner">
+                                <div class="card-category health">
+                                    <span class="material-symbols-outlined">favorite</span> Health
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Morning run felt amazing today&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p><strong>Runs before 8 AM</strong> precede 31% higher productivity and more positive mood entries that day. Your best weeks all start with early movement.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HEALTH 4 -->
+                        <div class="carousel-card" data-category="health">
+                            <div class="carousel-card-inner">
+                                <div class="card-category health">
+                                    <span class="material-symbols-outlined">favorite</span> Health
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Woke up at 3am, couldn&rsquo;t fall back asleep&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p><strong>Late-night work entries</strong> preceded 80% of your poor sleep nights. Best sleep follows evenings with no screen-related notes after 9 PM.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MIND 1 -->
+                        <div class="carousel-card" data-category="mind">
+                            <div class="carousel-card-inner">
+                                <div class="card-category mind">
+                                    <span class="material-symbols-outlined">psychology</span> Mind
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Really anxious about tomorrow&rsquo;s presentation&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p>You&rsquo;ve logged pre-event anxiety <strong>6 times</strong>. Post-event notes were positive every single time. Your worry consistently overestimates the actual difficulty.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MIND 2 -->
+                        <div class="carousel-card" data-category="mind">
+                            <div class="carousel-card-inner">
+                                <div class="card-category mind">
+                                    <span class="material-symbols-outlined">psychology</span> Mind
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;15 minutes of meditation this morning&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p><strong>Meditation days show 40% fewer</strong> stress entries. Your calmest weeks all include 4+ sessions. Morning timing produces the strongest effect for you.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MIND 3 -->
+                        <div class="carousel-card" data-category="mind">
+                            <div class="carousel-card-inner">
+                                <div class="card-category mind">
+                                    <span class="material-symbols-outlined">psychology</span> Mind
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Can&rsquo;t stop overthinking that conversation&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p><strong>Rumination peaks</strong> on days without physical activity. When you exercise before an overthinking episode, they appear 60% less often in your journal.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MIND 4 -->
+                        <div class="carousel-card" data-category="mind">
+                            <div class="carousel-card-inner">
+                                <div class="card-category mind">
+                                    <span class="material-symbols-outlined">psychology</span> Mind
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Feeling genuinely grateful today&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p>Gratitude entries have <strong>tripled since October</strong>. Weeks with 2+ gratitude notes match your highest wellbeing scores across all four categories.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WORK 1 -->
+                        <div class="carousel-card" data-category="work">
+                            <div class="carousel-card-inner">
+                                <div class="card-category work">
+                                    <span class="material-symbols-outlined">work</span> Work
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Deep focus block this morning &mdash; shipped the feature&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p>Your <strong>9&ndash;11 AM window</strong> produces 78% of deep work entries. Focus blocks of 90+ minutes generate 3x more &lsquo;accomplished&rsquo; notes than shorter ones.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WORK 2 -->
+                        <div class="carousel-card" data-category="work">
+                            <div class="carousel-card-inner">
+                                <div class="card-category work">
+                                    <span class="material-symbols-outlined">work</span> Work
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Back-to-back meetings all day, got nothing done&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p><strong>Days with 3+ meetings</strong> show zero deep work entries and correlate with evening frustration notes 70% of the time. Tuesday is your worst day.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WORK 3 -->
+                        <div class="carousel-card" data-category="work">
+                            <div class="carousel-card-inner">
+                                <div class="card-category work">
+                                    <span class="material-symbols-outlined">work</span> Work
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Had a breakthrough idea during my walk&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p><strong>40% of your best ideas</strong> are logged during walks, 35% post-exercise. Structured brainstorms produce fewer breakthrough entries than movement does.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WORK 4 -->
+                        <div class="carousel-card" data-category="work">
+                            <div class="carousel-card-inner">
+                                <div class="card-category work">
+                                    <span class="material-symbols-outlined">work</span> Work
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Feeling burned out, everything feels heavy&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p><strong>Burnout signals appeared 2 weeks ago</strong> &mdash; declining satisfaction, shorter entries, more &lsquo;tired&rsquo; mentions. Past recovery took 5&ndash;7 days of lighter load.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- LIFE 1 -->
+                        <div class="carousel-card" data-category="life">
+                            <div class="carousel-card-inner">
+                                <div class="card-category life">
+                                    <span class="material-symbols-outlined">sunny</span> Life
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Amazing dinner with old friends tonight&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p>Social entries are <strong>down 40%</strong> this month, but each one boosts your mood for 2&ndash;3 days after. Your journal says: prioritize these moments.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- LIFE 2 -->
+                        <div class="carousel-card" data-category="life">
+                            <div class="carousel-card-inner">
+                                <div class="card-category life">
+                                    <span class="material-symbols-outlined">sunny</span> Life
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Started that book &mdash; already 50 pages in&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p><strong>Reading streaks</strong> align with your calmest periods. Your longest low-anxiety stretch coincided with daily reading entries last March.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- LIFE 3 -->
+                        <div class="carousel-card" data-category="life">
+                            <div class="carousel-card-inner">
+                                <div class="card-category life">
+                                    <span class="material-symbols-outlined">sunny</span> Life
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Did nothing all weekend, feeling guilty about it&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p>Your &lsquo;lazy&rsquo; weekends actually <strong>precede more productive Mondays</strong> than packed ones. Unstructured rest works for you &mdash; the data says drop the guilt.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- LIFE 4 -->
+                        <div class="carousel-card" data-category="life">
+                            <div class="carousel-card-inner">
+                                <div class="card-category life">
+                                    <span class="material-symbols-outlined">sunny</span> Life
+                                </div>
+                                <div class="card-voice">
+                                    <div class="card-voice-icon"><span class="material-symbols-outlined">mic</span></div>
+                                    <p>&ldquo;Haven&rsquo;t called mom in two weeks&rdquo;</p>
+                                </div>
+                                <div class="card-flow"><span class="material-symbols-outlined">south</span></div>
+                                <div class="card-insight">
+                                    <div class="card-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+                                    <p>Family calls appear <strong>every 10&ndash;14 days</strong> in your journal. After each, satisfaction entries rise for 3&ndash;4 days. This relationship deeply recharges you.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="carousel-nav">
+                    <button class="carousel-arrow carousel-prev" aria-label="Previous insight">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <div class="carousel-dots">
+                        <button class="carousel-dot active" aria-label="Slide 1"></button>
+                        <button class="carousel-dot" aria-label="Slide 2"></button>
+                        <button class="carousel-dot" aria-label="Slide 3"></button>
+                        <button class="carousel-dot" aria-label="Slide 4"></button>
+                    </div>
+                    <span class="carousel-counter">1 / 4</span>
+                    <button class="carousel-arrow carousel-next" aria-label="Next insight">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-cta">
+                <a href="https://apps.apple.com/us/app/unote-transcribe-audio-to-text/id6741094680" class="btn-primary" target="_blank" rel="noopener"><svg class="apple-icon" width="18" height="18" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> Download Free</a>
+                <a href="#insights" class="btn-secondary">See AI Insights <span>&rarr;</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Manifesto -->
+    <section class="manifesto">
+        <div class="manifesto-content">
+            <h2>Your voice holds the truth.<br><em>AI reveals the meaning.</em></h2>
+            <p class="manifesto-text">Most journals collect dust. Unote listens. Speak freely about your health, your mindset, your work, your life &mdash; and let AI surface the patterns you'd never spot on your own. Then go deeper: ask questions, explore connections, and get actionable ideas from your own experience.</p>
+        </div>
+    </section>
+
+    <!-- Four Categories -->
+    <section id="categories" class="design-philosophy">
+        <div class="design-header">
+            <h2>Four pillars of your life</h2>
+            <p>Every voice note lands in one of four core categories &mdash; or any custom category you create.</p>
+        </div>
+        <div class="design-grid">
+            <div class="design-card">
+                <div class="design-icon">
+                    <span class="material-symbols-outlined">favorite</span>
+                </div>
+                <h3>Health</h3>
+                <p>Sleep, energy, symptoms, exercise, nutrition, supplements &mdash; everything about how your body feels and performs.</p>
+            </div>
+            <div class="design-card">
+                <div class="design-icon">
+                    <span class="material-symbols-outlined">psychology</span>
+                </div>
+                <h3>Mind</h3>
+                <p>Mood, stress, anxiety, gratitude, reflections, breakthroughs &mdash; the inner landscape that shapes your days.</p>
+            </div>
+            <div class="design-card">
+                <div class="design-icon">
+                    <span class="material-symbols-outlined">work</span>
+                </div>
+                <h3>Work</h3>
+                <p>Focus sessions, meetings, wins, blockers, ideas, deadlines &mdash; track what drives productivity and what drains it.</p>
+            </div>
+            <div class="design-card">
+                <div class="design-icon">
+                    <span class="material-symbols-outlined">sunny</span>
+                </div>
+                <h3>Life</h3>
+                <p>Relationships, hobbies, travel, goals, daily moments &mdash; capture the things that make life rich beyond work and health.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="hidden-tech">
+        <div class="hidden-tech-content">
+            <div class="hidden-tech-visual">
+                <div class="tech-diagram">
+                    <div class="tech-layers">
+                        <div class="tech-layer">
+                            <div class="layer-indicator fabric">
+                                <span class="material-symbols-outlined">mic</span>
+                            </div>
+                            <div class="layer-text">
+                                <h4>Voice Capture</h4>
+                                <p>Speak naturally &mdash; Unote transcribes and understands context</p>
+                            </div>
+                        </div>
+                        <div class="tech-layer">
+                            <div class="layer-indicator led"></div>
+                            <div class="layer-text">
+                                <h4>Smart Categorization</h4>
+                                <p>AI sorts notes into Health, Mind, Work, Life or your custom categories</p>
+                            </div>
+                        </div>
+                        <div class="tech-layer">
+                            <div class="layer-indicator sensor">
+                                <span class="material-symbols-outlined">auto_awesome</span>
+                            </div>
+                            <div class="layer-text">
+                                <h4>Deep AI Analysis</h4>
+                                <p>Patterns, correlations, and insights surface automatically over time</p>
+                            </div>
+                        </div>
+                        <div class="tech-layer">
+                            <div class="layer-indicator fabric">
+                                <span class="material-symbols-outlined">chat</span>
+                            </div>
+                            <div class="layer-text">
+                                <h4>Conversational Exploration</h4>
+                                <p>Chat with your journal to ask questions and go deeper</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden-tech-text">
+                <h2>From scattered thoughts to <em>clarity.</em></h2>
+                <p>Unote turns your spoken notes into a structured, AI-powered journal. Notes are categorized, enriched with Apple HealthKit data when relevant, and analyzed to reveal what's actually happening in your life.</p>
+                <div class="led-indicator-demo">
+                    <h4>Your journey from note to insight:</h4>
+                    <div class="led-states">
+                        <div class="led-state">
+                            <span class="led-dot time"></span>
+                            <span>Speak &mdash; record a thought in seconds</span>
+                        </div>
+                        <div class="led-state">
+                            <span class="led-dot recording"></span>
+                            <span>Categorize &mdash; AI places it in the right bucket</span>
+                        </div>
+                        <div class="led-state">
+                            <span class="led-dot health"></span>
+                            <span>Analyze &mdash; patterns emerge across entries</span>
+                        </div>
+                        <div class="led-state">
+                            <span class="led-dot alert"></span>
+                            <span>Chat &mdash; ask AI to explain, connect, and advise</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voice Capture -->
+    <section id="voice" class="voice-first">
+        <div class="voice-header">
+            <h2>Speak your life. <em>All of it.</em></h2>
+            <p>Voice notes across every dimension of your day. AI categorizes them automatically &mdash; or create your own custom categories for anything that matters to you.</p>
+        </div>
+        <div class="voice-grid">
+            <div class="voice-card featured">
+                <div class="voice-card-content">
+                    <div class="voice-card-icon">
+                        <span class="material-symbols-outlined">mic</span>
+                    </div>
+                    <h3>Just Talk. Unote Does the Rest.</h3>
+                    <p>Speak naturally about anything &mdash; your morning energy, a stressful call, an idea at lunch, how you slept. AI transcribes, categorizes into Health, Mind, Work, or Life, and starts building your personal insight graph.</p>
+                    <div class="voice-examples">
+                        <span class="voice-example">"Slept terribly, woke up at 3am"</span>
+                        <span class="voice-example">"Had a great brainstorm with the team"</span>
+                        <span class="voice-example">"Feeling anxious about tomorrow"</span>
+                        <span class="voice-example">"Ran 5k, felt amazing after"</span>
+                    </div>
+                </div>
+                <div class="voice-visual-demo">
+                    <div class="waveform">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                    <div class="voice-transcription">
+                        <p>"Long day but I feel accomplished. Shipped the feature."</p>
+                        <span>Work &bull; 6:47 PM</span>
+                    </div>
+                </div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-card-icon">
+                    <span class="material-symbols-outlined">favorite</span>
+                </div>
+                <h3>Health Notes</h3>
+                <p>Log sleep quality, energy levels, meals, symptoms, workouts, and supplements. AI connects the dots to your HealthKit data.</p>
+                <div class="voice-examples">
+                    <span class="voice-example">"Woke up groggy again"</span>
+                    <span class="voice-example">"Took magnesium before bed"</span>
+                    <span class="voice-example">"Headache since noon"</span>
+                </div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-card-icon">
+                    <span class="material-symbols-outlined">psychology</span>
+                </div>
+                <h3>Mind Notes</h3>
+                <p>Capture emotional states, reflections, anxieties, and moments of clarity throughout your day.</p>
+                <div class="voice-examples">
+                    <span class="voice-example">"Feeling calm after meditation"</span>
+                    <span class="voice-example">"Overthinking the presentation"</span>
+                    <span class="voice-example">"Grateful for the conversation"</span>
+                </div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-card-icon">
+                    <span class="material-symbols-outlined">work</span>
+                </div>
+                <h3>Work Notes</h3>
+                <p>Track deep work sessions, meeting takeaways, blockers, wins, and ideas. See what drives your best output.</p>
+                <div class="voice-examples">
+                    <span class="voice-example">"Deep focus for 2 hours straight"</span>
+                    <span class="voice-example">"Meeting was a waste of time"</span>
+                    <span class="voice-example">"New idea for the onboarding flow"</span>
+                </div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-card-icon">
+                    <span class="material-symbols-outlined">sunny</span>
+                </div>
+                <h3>Life Notes</h3>
+                <p>Journal about relationships, hobbies, personal goals, and the everyday moments that shape who you are.</p>
+                <div class="voice-examples">
+                    <span class="voice-example">"Great dinner with old friends"</span>
+                    <span class="voice-example">"Started reading that book"</span>
+                    <span class="voice-example">"Need to call mom this week"</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Insights -->
+    <section id="insights" class="ai-correlation">
+        <div class="correlation-header">
+            <h2>AI insights that go deep.<br><em>Not surface-level summaries.</em></h2>
+            <p>Unote doesn't just organize your notes &mdash; it finds the hidden connections between your health, mindset, work patterns, and life events. When relevant, Apple HealthKit data adds another layer of depth.</p>
+        </div>
+        <div class="correlation-showcase">
+            <div class="correlation-item">
+                <div class="correlation-inputs">
+                    <div class="correlation-input mind">
+                        <span class="material-symbols-outlined">psychology</span>
+                        Mind: "Anxious before meetings" logged 5x this month
+                    </div>
+                    <span class="correlation-plus">+</span>
+                    <div class="correlation-input work">
+                        <span class="material-symbols-outlined">work</span>
+                        Work: "Meeting went fine" logged after each one
+                    </div>
+                </div>
+                <div class="correlation-output">
+                    <span class="material-symbols-outlined">lightbulb</span>
+                    <p><strong>Pattern discovered:</strong> Your pre-meeting anxiety rarely matches outcomes. 90% of meetings you dreaded were logged as positive or neutral afterward. The pattern suggests anticipatory anxiety, not situational.</p>
+                </div>
+            </div>
+            <div class="correlation-item">
+                <div class="correlation-inputs">
+                    <div class="correlation-input health">
+                        <span class="material-symbols-outlined">favorite</span>
+                        Health: "Slept badly" logged 3 nights this week
+                    </div>
+                    <span class="correlation-plus">+</span>
+                    <div class="correlation-input sensor">
+                        <span class="material-symbols-outlined">monitoring</span>
+                        HealthKit: HRV dropped 15%, resting HR up 8bpm
+                    </div>
+                </div>
+                <div class="correlation-output">
+                    <span class="material-symbols-outlined">lightbulb</span>
+                    <p><strong>Insight:</strong> Poor sleep notes correlate with late-evening Work notes. On nights you journaled about work after 9 PM, sleep quality and HRV both dropped significantly.</p>
+                </div>
+            </div>
+            <div class="correlation-item">
+                <div class="correlation-inputs">
+                    <div class="correlation-input work">
+                        <span class="material-symbols-outlined">work</span>
+                        Work: "Deep focus blocks" logged 4x this week
+                    </div>
+                    <span class="correlation-plus">+</span>
+                    <div class="correlation-input mind">
+                        <span class="material-symbols-outlined">psychology</span>
+                        Mind: "Feeling accomplished" logged 3x this week
+                    </div>
+                </div>
+                <div class="correlation-output">
+                    <span class="material-symbols-outlined">lightbulb</span>
+                    <p><strong>Pattern discovered:</strong> Weeks with 3+ deep focus blocks consistently produce more positive Mind entries. Your sense of accomplishment is strongly tied to uninterrupted work time.</p>
+                </div>
+            </div>
+            <div class="correlation-item">
+                <div class="correlation-inputs">
+                    <div class="correlation-input life">
+                        <span class="material-symbols-outlined">sunny</span>
+                        Life: "Skipped gym" and "Cancelled plans" logged same week
+                    </div>
+                    <span class="correlation-plus">+</span>
+                    <div class="correlation-input mind">
+                        <span class="material-symbols-outlined">psychology</span>
+                        Mind: Mood entries trending negative over 10 days
+                    </div>
+                </div>
+                <div class="correlation-output">
+                    <span class="material-symbols-outlined">warning</span>
+                    <p><strong>Early signal:</strong> Withdrawal from social activities and exercise has preceded low mood periods in your journal 3 times. This looks like the start of a familiar pattern &mdash; consider reaching out to someone today.</p>
+                </div>
+            </div>
+            <div class="correlation-item">
+                <div class="correlation-inputs">
+                    <div class="correlation-input health">
+                        <span class="material-symbols-outlined">favorite</span>
+                        Health: "Morning walks" logged 5x this week
+                    </div>
+                    <span class="correlation-plus">+</span>
+                    <div class="correlation-input sensor">
+                        <span class="material-symbols-outlined">monitoring</span>
+                        HealthKit: Sleep efficiency up 14%, deep sleep +22min
+                    </div>
+                </div>
+                <div class="correlation-output">
+                    <span class="material-symbols-outlined">lightbulb</span>
+                    <p><strong>Insight:</strong> Your best sleep weeks consistently follow morning walk streaks. Combined with HealthKit data, walks before 9 AM show the strongest effect on deep sleep duration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat with Journal -->
+    <section id="chat" class="voice-first">
+        <div class="voice-header">
+            <h2>Chat with your journal.<br><em>Go deeper.</em></h2>
+            <p>The real power of Unote is the conversation. Ask questions about your patterns, get personalized suggestions, explore what your notes reveal when connected together.</p>
+        </div>
+        <div class="voice-grid">
+            <div class="voice-card featured">
+                <div class="voice-card-content">
+                    <div class="voice-card-icon">
+                        <span class="material-symbols-outlined">chat</span>
+                    </div>
+                    <h3>Your AI Journal Companion</h3>
+                    <p>Ask anything about your journal entries, insights, and patterns. Unote's AI has full context of your notes, categories, and HealthKit data &mdash; so the answers are deeply personal and genuinely useful.</p>
+                    <div class="voice-examples">
+                        <span class="voice-example">"Why have I been so tired lately?"</span>
+                        <span class="voice-example">"What helps my focus the most?"</span>
+                        <span class="voice-example">"Show me patterns from this month"</span>
+                    </div>
+                </div>
+                <div class="voice-visual-demo">
+                    <div class="chat-demo">
+                        <div class="chat-bubble user-bubble">What's been affecting my sleep this month?</div>
+                        <div class="chat-bubble ai-bubble">Based on your journal, three patterns stand out: late Work notes after 9 PM appear on 4 of your 5 worst sleep nights. Caffeine notes after 2 PM correlate with lighter sleep. But your morning walk entries consistently precede your best sleep scores.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-card-icon">
+                    <span class="material-symbols-outlined">explore</span>
+                </div>
+                <h3>Explore Connections</h3>
+                <p>Ask the AI to find links between categories you'd never think to connect &mdash; like how your social life affects your work output.</p>
+                <div class="voice-examples">
+                    <span class="voice-example">"How does my social life affect my work?"</span>
+                    <span class="voice-example">"What happens after I skip exercise?"</span>
+                </div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-card-icon">
+                    <span class="material-symbols-outlined">tips_and_updates</span>
+                </div>
+                <h3>Get Actionable Ideas</h3>
+                <p>Don't just see patterns &mdash; ask for suggestions. Unote proposes experiments, routines, and changes based on what's actually worked for you before.</p>
+                <div class="voice-examples">
+                    <span class="voice-example">"What should I try to improve my energy?"</span>
+                    <span class="voice-example">"Give me a plan for better mornings"</span>
+                </div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-card-icon">
+                    <span class="material-symbols-outlined">query_stats</span>
+                </div>
+                <h3>Weekly &amp; Monthly Reviews</h3>
+                <p>Ask for a summary of any period. Get a clear picture of how your health, mind, work, and life evolved &mdash; and what to focus on next.</p>
+                <div class="voice-examples">
+                    <span class="voice-example">"Summarize my last two weeks"</span>
+                    <span class="voice-example">"How was January compared to December?"</span>
+                </div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-card-icon">
+                    <span class="material-symbols-outlined">self_improvement</span>
+                </div>
+                <h3>Personal Growth Tracking</h3>
+                <p>Ask about your progress toward goals, shifts in your thinking over time, or habits that are sticking versus fading.</p>
+                <div class="voice-examples">
+                    <span class="voice-example">"Am I less anxious than last month?"</span>
+                    <span class="voice-example">"Which habits have I stuck with?"</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apple HealthKit -->
+    <section id="healthkit" class="sensors-section">
+        <div class="sensors-header">
+            <h2>Enriched with Apple HealthKit</h2>
+            <p>When relevant, Unote combines your journal notes with HealthKit data to provide deeper, evidence-backed insights.</p>
+        </div>
+        <div class="sensors-grid">
+            <div class="sensor-card">
+                <div class="sensor-icon heart">
+                    <span class="material-symbols-outlined">ecg_heart</span>
+                </div>
+                <h3>Heart Rate</h3>
+                <p>See how stress notes, caffeine entries, and work patterns map to your heart rate trends.</p>
+            </div>
+            <div class="sensor-card">
+                <div class="sensor-icon hrv">
+                    <span class="material-symbols-outlined">cardiology</span>
+                </div>
+                <h3>HRV &amp; Recovery</h3>
+                <p>Understand how your journaled activities and mental states connect to your body's recovery signals.</p>
+            </div>
+            <div class="sensor-card">
+                <div class="sensor-icon sleep">
+                    <span class="material-symbols-outlined">bedtime</span>
+                </div>
+                <h3>Sleep Analysis</h3>
+                <p>Link your evening notes and habits to actual sleep stage data for better rest.</p>
+            </div>
+            <div class="sensor-card">
+                <div class="sensor-icon motion">
+                    <span class="material-symbols-outlined">directions_walk</span>
+                </div>
+                <h3>Activity &amp; Steps</h3>
+                <p>Connect movement data to your mood, energy, and productivity journal entries.</p>
+            </div>
+            <div class="sensor-card">
+                <div class="sensor-icon oxygen">
+                    <span class="material-symbols-outlined">pulmonology</span>
+                </div>
+                <h3>Respiratory &amp; SpO2</h3>
+                <p>Add respiratory context to health notes for a more complete picture of your wellbeing.</p>
+            </div>
+            <div class="sensor-card">
+                <div class="sensor-icon temp">
+                    <span class="material-symbols-outlined">local_fire_department</span>
+                </div>
+                <h3>Energy Expenditure</h3>
+                <p>See how your physical activity correlates with the energy and mood you journal about.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Categories -->
+    <section id="custom" class="collection">
+        <div class="collection-header">
+            <h2>Make It Yours</h2>
+            <p>Beyond Health, Mind, Work, and Life &mdash; create custom categories for anything you want to track and understand.</p>
+        </div>
+        <div class="design-grid" style="max-width: 1000px; margin: 0 auto;">
+            <div class="design-card">
+                <div class="design-icon">
+                    <span class="material-symbols-outlined">local_library</span>
+                </div>
+                <h3>Reading</h3>
+                <p>Track books, articles, and ideas worth remembering.</p>
+            </div>
+            <div class="design-card">
+                <div class="design-icon">
+                    <span class="material-symbols-outlined">family_restroom</span>
+                </div>
+                <h3>Parenting</h3>
+                <p>Note milestones, routines, and reflections on family life.</p>
+            </div>
+            <div class="design-card">
+                <div class="design-icon">
+                    <span class="material-symbols-outlined">brush</span>
+                </div>
+                <h3>Creative Projects</h3>
+                <p>Capture inspiration, progress, and ideas for creative work.</p>
+            </div>
+            <div class="design-card">
+                <div class="design-icon">
+                    <span class="material-symbols-outlined">add_circle</span>
+                </div>
+                <h3>Your Category</h3>
+                <p>Create as many custom categories as you need. AI treats them with the same depth.</p>
+            </div>
+        </div>
+        <div class="sizing-note">
+            <p>Custom categories get the same AI analysis and chat capabilities as the four core pillars. <strong>Your journal, your structure.</strong></p>
+        </div>
+    </section>
+
+    <!-- Specs -->
+    <section class="specs-section">
+        <div class="specs-header">
+            <h2>What You Get</h2>
+        </div>
+        <div class="specs-grid">
+            <div class="spec-column">
+                <h3>AI Insights</h3>
+                <ul>
+                    <li>Cross-category pattern detection</li>
+                    <li>HealthKit-enriched analysis</li>
+                    <li>Weekly &amp; monthly summaries</li>
+                    <li>Early warning signals</li>
+                    <li>Personalized suggestions</li>
+                    <li>Trend tracking over time</li>
+                </ul>
+            </div>
+            <div class="spec-column">
+                <h3>Journal Chat</h3>
+                <ul>
+                    <li>Ask anything about your notes</li>
+                    <li>Explore connections between entries</li>
+                    <li>Get actionable recommendations</li>
+                    <li>Review any time period</li>
+                    <li>Track personal growth</li>
+                </ul>
+            </div>
+            <div class="spec-column">
+                <h3>Voice Capture</h3>
+                <ul>
+                    <li>One-tap voice recording</li>
+                    <li>Automatic transcription</li>
+                    <li>AI-powered categorization</li>
+                    <li>4 system categories</li>
+                    <li>Unlimited custom categories</li>
+                </ul>
+            </div>
+            <div class="spec-column">
+                <h3>Integration</h3>
+                <ul>
+                    <li>Apple HealthKit sync</li>
+                    <li>iPhone app</li>
+                    <li>Apple Watch app</li>
+                    <li>Searchable timeline</li>
+                    <li>Export &amp; backup</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Start understanding <em>yourself.</em></h2>
+            <p>A voice journal that doesn&rsquo;t just record &mdash; it thinks, connects, and helps you grow. Free on iPhone and Apple Watch.</p>
+            <a href="https://apps.apple.com/us/app/unote-transcribe-audio-to-text/id6741094680" class="cta-appstore" target="_blank" rel="noopener"><svg class="apple-icon" width="20" height="20" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> Download Free on the App Store</a>
+            <p class="cta-note">Free to download &bull; Premium features available</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo"><div class="logo-circle"></div>Unote</div>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Support</a>
+                <a href="#">Press</a>
+                <a href="#">Contact</a>
+            </div>
+            <p class="footer-tagline">Voice journaling with deep AI insights.</p>
+            <p>&copy; 2026 Unote. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal removed: app is live on the App Store -->
+
+    <script src="script.js"></script>
+    <script>
+    // Insight Carousel
+    (function() {
+        const track = document.querySelector('.carousel-track');
+        const cards = [...document.querySelectorAll('.carousel-card')];
+        const tabs = [...document.querySelectorAll('.carousel-tab')];
+        const dots = [...document.querySelectorAll('.carousel-dot')];
+        const counter = document.querySelector('.carousel-counter');
+        const prevBtn = document.querySelector('.carousel-prev');
+        const nextBtn = document.querySelector('.carousel-next');
+        const viewport = document.querySelector('.carousel-viewport');
+
+        if (!track || cards.length === 0) return;
+
+        const categoryMap = { health: 0, mind: 4, work: 8, life: 12 };
+        const cardsPerCategory = 4;
+        const AUTO_PLAY_DELAY = 8000; // Increased from 5000ms to 8000ms (8 seconds)
+        let currentIndex = 0;
+        let autoPlayTimer = null;
+        let isTransitioning = false;
+
+        function getCurrentCategory() {
+            return cards[currentIndex].dataset.category;
+        }
+
+        function getLocalIndex() {
+            const cat = getCurrentCategory();
+            return currentIndex - categoryMap[cat];
+        }
+
+        function update(smooth) {
+            // Prevent multiple transitions at once
+            if (isTransitioning && smooth) {
+                return;
+            }
+
+            if (smooth) {
+                isTransitioning = true;
+            }
+
+            if (smooth === false) {
+                track.style.transition = 'none';
+            } else {
+                track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            }
+            track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+
+            if (smooth === false) {
+                track.offsetHeight; // force reflow
+                track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            }
+
+            // Update tabs
+            var cat = getCurrentCategory();
+            tabs.forEach(function(t) {
+                t.classList.toggle('active', t.dataset.category === cat);
+            });
+
+            // Update dots
+            var localIdx = getLocalIndex();
+            dots.forEach(function(d, i) {
+                d.classList.toggle('active', i === localIdx);
+            });
+
+            // Update counter
+            if (counter) {
+                counter.textContent = (localIdx + 1) + ' / ' + cardsPerCategory;
+            }
+
+            // Reset transition flag after animation completes
+            if (smooth) {
+                setTimeout(function() {
+                    isTransitioning = false;
+                }, 500);
+            }
+        }
+
+        function next() {
+            if (isTransitioning) return;
+            currentIndex = (currentIndex + 1) % cards.length;
+            update(true);
+        }
+
+        function prev() {
+            if (isTransitioning) return;
+            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+            update(true);
+        }
+
+        function goToCategory(cat) {
+            if (isTransitioning) return;
+            currentIndex = categoryMap[cat];
+            update(false);
+        }
+
+        function goToDot(localIdx) {
+            if (isTransitioning) return;
+            var cat = getCurrentCategory();
+            currentIndex = categoryMap[cat] + localIdx;
+            update(true);
+        }
+
+        function startAutoPlay() {
+            stopAutoPlay();
+            autoPlayTimer = setInterval(function() {
+                // Double-check we're not transitioning before auto-advancing
+                if (!isTransitioning) {
+                    next();
+                }
+            }, AUTO_PLAY_DELAY);
+        }
+
+        function stopAutoPlay() {
+            if (autoPlayTimer) {
+                clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+            }
+        }
+
+        function resetAutoPlay() {
+            stopAutoPlay();
+            // Small delay before restarting to prevent immediate re-trigger
+            setTimeout(startAutoPlay, 100);
+        }
+
+        // Tab clicks
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                goToCategory(tab.dataset.category);
+                resetAutoPlay();
+            });
+        });
+
+        // Dot clicks
+        dots.forEach(function(dot, i) {
+            dot.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                goToDot(i);
+                resetAutoPlay();
+            });
+        });
+
+        // Arrow clicks
+        prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            prev();
+            resetAutoPlay();
+        });
+        
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            next();
+            resetAutoPlay();
+        });
+
+        // Pause on hover
+        viewport.addEventListener('mouseenter', stopAutoPlay);
+        viewport.addEventListener('mouseleave', function() {
+            // Only restart if we're not transitioning
+            if (!isTransitioning) {
+                startAutoPlay();
+            } else {
+                // Wait for transition to complete before restarting
+                setTimeout(startAutoPlay, 600);
+            }
+        });
+
+        // Touch swipe support
+        var touchStartX = 0;
+        var touchStartY = 0;
+        viewport.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            stopAutoPlay();
+        }, { passive: true });
+
+        viewport.addEventListener('touchend', function(e) {
+            var diffX = touchStartX - e.changedTouches[0].clientX;
+            var diffY = touchStartY - e.changedTouches[0].clientY;
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                diffX > 0 ? next() : prev();
+            }
+            setTimeout(startAutoPlay, 100);
+        }, { passive: true });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prev();
+                resetAutoPlay();
+            }
+            if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                next();
+                resetAutoPlay();
+            }
+        });
+
+        // Initialize
+        update(false);
+        startAutoPlay();
+
+        // Cleanup on page visibility change to prevent stuck animations
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                stopAutoPlay();
+                isTransitioning = false;
+            } else {
+                startAutoPlay();
+            }
+        });
+    })();
+    </script>
+</body>
+</html>
